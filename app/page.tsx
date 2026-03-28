@@ -32,10 +32,14 @@ export default function Home() {
     }
   }, [messages, activeTopic]);
 
-  const handleSendMessage = async (text: string, currentMessages: any[] = messages) => {
-    if (!text.trim() || isLoading) return;
+  const handleSendMessage = async (text: string, currentMessages: any[] = messages, fileData?: { mimeType: string, data: string }) => {
+    if ((!text.trim() && !fileData) || isLoading) return;
 
-    const userMessage = { role: "user", content: text };
+    const userMessageContent = fileData && fileData.mimeType.startsWith("image/")
+      ? text // Keep text as text, but we'll use fileData for the API call
+      : text;
+
+    const userMessage = { role: "user", content: userMessageContent };
     const history = currentMessages.map(m => ({
       role: m.role,
       parts: m.content
@@ -52,7 +56,7 @@ export default function Home() {
       await getScoobyResponse(
         text,
         history,
-        undefined,
+        fileData,
         (chunk) => {
           setMessages(prev => {
             const lastMessage = prev[prev.length - 1];

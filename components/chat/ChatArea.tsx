@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useRef, useEffect } from "react";
-import { Send, Menu, Sparkles, FileText, Layout, Lightbulb, HelpCircle, Copy, Check, Mic } from "lucide-react";
+import { Send, Menu, Sparkles, FileText, Layout, Lightbulb, HelpCircle, Copy, Check, Mic, Paperclip, X } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import MessageBubble from "./MessageBubble";
 import ScoobyAvatarSVG from "@/components/ui/ScoobyAvatarSVG";
@@ -16,7 +16,7 @@ interface ChatAreaProps {
   onToggleSidebar: () => void;
   activeTopic: string;
   onTopicClick: (topic: string, subject: string) => void;
-  handleSendMessage: (text: string, currentMessages?: Message[]) => Promise<void>;
+  handleSendMessage: (text: string, currentMessages?: Message[], fileData?: { mimeType: string, data: string }) => Promise<void>;
   messages: Message[];
   setMessages: React.Dispatch<React.SetStateAction<Message[]>>;
   isLoading: boolean;
@@ -36,8 +36,46 @@ export default function ChatArea({
   const { setAvatarState } = useAvatar();
   const [input, setInput] = useState("");
   const [isRecording, setIsRecording] = useState(false);
+  const [selectedFile, setSelectedFile] = useState<{ 
+    file: File; 
+    preview: string; 
+    base64: string;
+    mimeType: string;
+  } | null>(null);
+  
   const scrollRef = useRef<HTMLDivElement>(null);
   const recognitionRef = useRef<any>(null);
+  const fileInputRef = useRef<HTMLInputElement>(null);
+
+  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+
+    // Check file size (max 4.5MB for Groq)
+    if (file.size > 4.5 * 1024 * 1024) {
+      alert("File is too large! Please select a file smaller than 4.5MB.");
+      return;
+    }
+
+    const reader = new FileReader();
+    reader.onloadend = () => {
+      setSelectedFile({
+        file,
+        preview: URL.createObjectURL(file),
+        base64: reader.result as string,
+        mimeType: file.type
+      });
+    };
+    reader.readAsDataURL(file);
+  };
+
+  const removeFile = () => {
+    if (selectedFile?.preview) {
+      URL.revokeObjectURL(selectedFile.preview);
+    }
+    setSelectedFile(null);
+    if (fileInputRef.current) fileInputRef.current.value = "";
+  };
 
   // Setup Voice Recognition
   useEffect(() => {
@@ -97,15 +135,24 @@ export default function ChatArea({
 
   const handleSend = async (text: string) => {
     const messageText = text || input;
-    if (!messageText.trim() || isLoading) return;
+    if ((!messageText.trim() && !selectedFile) || isLoading) return;
 
     if (isRecording) {
       recognitionRef.current?.stop();
       setIsRecording(false);
     }
 
+    const fileData = selectedFile ? {
+      mimeType: selectedFile.mimeType,
+      data: selectedFile.base64
+    } : undefined;
+
     if (!text) setInput(""); // Clear input if sending from form
-    await handleSendMessage(messageText);
+    
+    // Clear file preview immediately
+    removeFile();
+    
+    await handleSendMessage(messageText, undefined, fileData);
     setAvatarState("thinking");
   };
 
@@ -237,10 +284,61 @@ export default function ChatArea({
             ))}
           </div>
 
+          {/* File Preview */}
+          <AnimatePresence>
+            {selectedFile && (
+              <motion.div
+                initial={{ opacity: 0, scale: 0.9, y: 10 }}
+                animate={{ opacity: 1, scale: 1, y: 0 }}
+                exit={{ opacity: 0, scale: 0.9, y: 10 }}
+                className="mb-3 p-2 rounded-xl bg-card border border-border flex items-center gap-3 w-fit relative group"
+              >
+                {selectedFile.mimeType.startsWith("image/") ? (
+                  <img src={selectedFile.preview} alt="upload" className="w-10 h-10 rounded-lg object-cover border border-border" />
+                ) : (
+                  <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center border border-border">
+                    <FileText className="text-primary" size={20} />
+                  </div>
+                )}
+                <div className="flex flex-col pr-6">
+                  <span className="text-[11px] font-bold text-white max-w-[120px] truncate">{selectedFile.file.name}</span>
+                  <span className="text-[9px] text-text-muted">{(selectedFile.file.size / 1024).toFixed(1)} KB</span>
+                </div>
+                <button 
+                  type="button"
+                  onClick={removeFile}
+                  className="absolute -top-2 -right-2 p-1 rounded-full bg-red-500 text-white shadow-lg scale-0 group-hover:scale-100 transition-transform"
+                >
+                  <X size={12} />
+                </button>
+              </motion.div>
+            )}
+          </AnimatePresence>
+
           <form 
             onSubmit={(e) => { e.preventDefault(); handleSend(""); }}
             className="flex items-center gap-2"
           >
+            <input 
+              type="file" 
+              ref={fileInputRef} 
+              onChange={handleFileChange} 
+              className="hidden" 
+              accept="image/*,.pdf,.doc,.docx,.txt"
+            />
+            
+            <button
+              type="button"
+              onClick={() => fileInputRef.current?.click()}
+              className={`p-2.5 rounded-xl border transition-all flex-shrink-0 ${
+                selectedFile 
+                  ? "bg-primary/20 text-primary border-primary/50" 
+                  : "bg-card border-border text-text-muted hover:text-primary"
+              }`}
+            >
+              <Paperclip size={20} />
+            </button>
+
             <div className="relative flex-1 group">
               <input
                 type="text"

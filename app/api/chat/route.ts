@@ -20,22 +20,38 @@ export async function POST(request: Request) {
   const groq = new Groq({ apiKey });
 
   try {
-    const { message, history } = await request.json();
+    const { message, history, fileData } = await request.json();
 
-    const messages = [
-      { role: "system" as const, content: SYSTEM_PROMPT },
+    // Use vision model if image is provided
+    const isImage = fileData && fileData.mimeType.startsWith("image/");
+    const model = isImage ? "llama-3.2-11b-vision-preview" : "llama-3.3-70b-versatile";
+
+    const messages: any[] = [
+      { role: "system", content: SYSTEM_PROMPT },
       ...history
         .filter((h: any) => h.parts && h.parts.trim() !== "")
         .slice(-10)
         .map((h: any) => ({
-          role: h.role === "user" ? ("user" as const) : ("assistant" as const),
+          role: h.role === "user" ? "user" : "assistant",
           content: h.parts,
         })),
-      { role: "user" as const, content: message },
     ];
 
+    // Format final user message
+    if (isImage) {
+      messages.push({
+        role: "user",
+        content: [
+          { type: "text", text: message },
+          { type: "image_url", image_url: { url: fileData.data } }
+        ]
+      });
+    } else {
+      messages.push({ role: "user", content: message });
+    }
+
     const stream = await groq.chat.completions.create({
-      model: "llama-3.3-70b-versatile",
+      model,
       messages,
       stream: true,
       max_tokens: 2048,

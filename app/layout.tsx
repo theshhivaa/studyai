@@ -14,6 +14,7 @@ const orbitron = Orbitron({
 export const metadata: Metadata = {
   title: "Scooby BCA | AI Assistant",
   description: "Your intelligent study companion for Bachelor of Computer Applications",
+  viewport: "width=device-width, initial-scale=1, maximum-scale=1",
 };
 
 export default function RootLayout({

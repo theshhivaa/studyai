@@ -255,7 +255,7 @@ export default function ChatWindow({ initialMessage = "" }: { initialMessage?: s
       {/* Messages Area */}
       <div 
         ref={scrollRef}
-        className="flex-1 overflow-y-auto p-4 md:p-6 custom-scrollbar space-y-4 relative z-10"
+        className="flex-1 overflow-y-auto p-4 md:p-6 pt-16 md:pt-6 custom-scrollbar space-y-4 relative z-10"
       >
         <div className="max-w-4xl mx-auto w-full">
           <AnimatePresence initial={false}>

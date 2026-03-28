@@ -1,7 +1,6 @@
 import Groq from "groq-sdk";
 import { NextResponse } from "next/server";
 
-const groq = new Groq({ apiKey: process.env.GROQ_API_KEY });
 
 const SYSTEM_PROMPT = `You are Scooby, a helpful and friendly AI tutor for BCA (Bachelor of Computer Applications) students. You specialize in all BCA subjects including Data Structures, DBMS, Operating Systems, Computer Networks, Web Technology, C++, Java, and more.
 Your personality: Friendly, smart, encouraging — like a senior student who knows everything.

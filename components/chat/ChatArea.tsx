@@ -68,7 +68,7 @@ export default function ChatArea({
       <header className="h-14 border-b border-border flex items-center justify-between px-4 z-20 bg-background/80 backdrop-blur-md sticky top-0">
         <button 
           onClick={onToggleSidebar}
-          className="p-2 -ml-2 text-white hover:bg-card rounded-lg transition-colors"
+          className="p-2 -ml-2 text-white hover:bg-card rounded-lg transition-colors md:hidden"
         >
           <Menu size={24} />
         </button>

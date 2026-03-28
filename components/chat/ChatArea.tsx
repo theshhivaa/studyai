@@ -209,7 +209,7 @@ export default function ChatArea({
               initial={{ scale: 0.8, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
               transition={{ duration: 0.5 }}
-              className="mb-8 p-4 md:p-6 rounded-full bg-card border border-border w-24 h-24 md:w-40 md:h-40 mx-auto flex items-center justify-center shadow-xl shadow-yellow/10 ring-4 ring-yellow/5"
+              className="mb-8 p-4 md:p-6 rounded-full bg-card border-2 border-primary w-24 h-24 md:w-40 md:h-40 mx-auto flex items-center justify-center shadow-2xl shadow-primary/20 ring-4 ring-primary/10"
             >
               <ScoobyyAvatar variant="yellow" className="w-full h-full" />
             </motion.div>

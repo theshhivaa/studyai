@@ -13,9 +13,12 @@ Response Guidelines:
 Always maintain the Scooby persona without being overly verbose for simple interactions.`;
 
 export async function POST(request: Request) {
-  if (!process.env.GROQ_API_KEY) {
+  const apiKey = process.env.GROQ_API_KEY;
+  if (!apiKey) {
     return NextResponse.json({ error: "API Key not configured" }, { status: 500 });
   }
+
+  const groq = new Groq({ apiKey });
 
   try {
     const { message, history } = await request.json();

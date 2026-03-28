@@ -11,7 +11,7 @@ interface SyllabusSidebarProps {
 
 export default function SyllabusSidebar({ onTopicClick }: SyllabusSidebarProps) {
   const [mounted, setMounted] = useState(false);
-  const [openSemester, setOpenSemester] = useState<number | null>(4); // Default to Semester 4
+  const [openSemester, setOpenSemester] = useState<number | null>(null);
   const [openSubject, setOpenSubject] = useState<string | null>(null);
   const [openModule, setOpenModule] = useState<string | null>(null);
   const [searchQuery, setSearchQuery] = useState("");

@@ -126,7 +126,11 @@ export default function MessageBubble({ role, content }: MessageBubbleProps) {
           )}
  
           {/* Message Content */}
-          <div className="prose prose-invert prose-sm max-w-none prose-p:leading-relaxed prose-pre:bg-black/40 prose-pre:backdrop-blur-sm prose-pre:border prose-pre:border-white/10 relative z-10 selection:bg-cyan-500/30">
+          <div className={`prose prose-invert max-w-none relative z-10 selection:bg-cyan-500/30 break-words overflow-hidden ${
+            role === "assistant" 
+              ? "text-[15px] leading-relaxed text-slate-200 font-sans" 
+              : "text-[14px] leading-relaxed text-white font-sans"
+          }`}>
             <div className="flex flex-col gap-3">
               {role === "user" && content.includes("data:image") && (
                 <motion.img 
@@ -137,11 +141,28 @@ export default function MessageBubble({ role, content }: MessageBubbleProps) {
                   className="max-w-full rounded-xl border border-white/20 shadow-lg" 
                 />
               )}
-              <ReactMarkdown>
-                {role === "user" && content.includes("data:image") 
-                  ? content.split("\n").slice(1).join("\n") 
-                  : content}
-              </ReactMarkdown>
+              <div className="markdown-content">
+                <ReactMarkdown
+                  components={{
+                    h1: ({node, ...props}) => <h1 className="text-lg font-bold text-white mb-2 mt-4" {...props} />,
+                    h2: ({node, ...props}) => <h2 className="text-base font-bold text-white mb-2 mt-3" {...props} />,
+                    p: ({node, ...props}) => <p className="mb-3 last:mb-0" {...props} />,
+                    ul: ({node, ...props}) => <ul className="list-disc pl-4 mb-3 space-y-1" {...props} />,
+                    ol: ({node, ...props}) => <ol className="list-decimal pl-4 mb-3 space-y-1" {...props} />,
+                    li: ({node, ...props}) => <li className="mb-1" {...props} />,
+                    strong: ({node, ...props}) => <strong className="font-bold text-white" {...props} />,
+                    code: ({node, inline, ...props}: any) => (
+                      inline 
+                        ? <code className="bg-white/10 px-1 rounded text-cyan-400 font-mono text-[13px]" {...props} />
+                        : <pre className="bg-black/40 p-3 rounded-xl border border-white/10 overflow-x-auto my-3"><code className="text-[13px] font-mono" {...props} /></pre>
+                    )
+                  }}
+                >
+                  {role === "user" && content.includes("data:image") 
+                    ? content.split("\n").slice(1).join("\n") 
+                    : content}
+                </ReactMarkdown>
+              </div>
             </div>
           </div>
           

@@ -23,7 +23,6 @@ export default function Footer() {
             <h3 className="text-white font-semibold mb-4 font-orbitron text-sm tracking-widest uppercase">Quick Links</h3>
             <ul className="space-y-2 text-sm text-muted">
               <li><Link href="/syllabus" className="hover:text-primary transition-colors">Syllabus</Link></li>
-              <li><Link href="/notes" className="hover:text-primary transition-colors">Notes Library</Link></li>
               <li><Link href="/chat" className="hover:text-primary transition-colors">Ask Scooby</Link></li>
               <li><Link href="/about" className="hover:text-primary transition-colors">About Us</Link></li>
             </ul>

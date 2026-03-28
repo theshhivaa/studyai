@@ -7,7 +7,6 @@ import ScoobyAvatarSVG from "@/components/ui/ScoobyAvatarSVG";
 
 const navLinks = [
   { name: "Syllabus", href: "/syllabus" },
-  { name: "Notes", href: "/notes" },
   { name: "Ask Scooby", href: "/chat" },
 ];
 

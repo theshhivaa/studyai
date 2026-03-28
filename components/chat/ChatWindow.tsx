@@ -415,7 +415,7 @@ export default function ChatWindow({ initialMessage = "" }: { initialMessage?: s
                 value={input}
                 onChange={(e) => setInput(e.target.value)}
                 placeholder={isRecording ? "Listening..." : "Ask Scooby..."}
-                className={`w-full bg-[#111827]/80 backdrop-blur-md border rounded-2xl py-4 pl-12 pr-4 text-sm focus:outline-none transition-all placeholder:text-muted/50 ${
+                className={`w-full bg-[#111827]/80 backdrop-blur-md border rounded-2xl py-4 pl-12 pr-4 text-base focus:outline-none transition-all placeholder:text-muted/50 ${
                   isRecording 
                     ? "border-cyan-500 ring-4 ring-cyan-500/10 bg-cyan-500/5 shadow-[0_0_25px_rgba(34,211,238,0.1)]" 
                     : "border-white/10 focus:border-cyan-500/50 focus:ring-4 focus:ring-cyan-500/5"

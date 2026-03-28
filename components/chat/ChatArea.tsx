@@ -209,9 +209,9 @@ export default function ChatArea({
               initial={{ scale: 0.8, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
               transition={{ duration: 0.5 }}
-              className="mb-6 p-6 rounded-full bg-card border border-border"
+              className="mb-8 p-4 md:p-6 rounded-full bg-card border border-border w-24 h-24 md:w-40 md:h-40 mx-auto flex items-center justify-center shadow-xl shadow-yellow/10 ring-4 ring-yellow/5"
             >
-              <ScoobyyAvatar size={160} variant="yellow" />
+              <ScoobyyAvatar variant="yellow" className="w-full h-full" />
             </motion.div>
             <h1 className="text-2xl font-bold text-white mb-2">Hey! I'm Scooby</h1>
             <p className="text-text-muted mb-8 text-sm">Pick a topic or ask me anything about BCA</p>

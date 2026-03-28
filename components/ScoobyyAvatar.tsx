@@ -1,6 +1,10 @@
-import React from 'react';
+interface ScoobyyAvatarProps {
+  size?: number | string | null;
+  variant?: 'black' | 'yellow' | 'outline';
+  className?: string;
+}
 
-const ScoobyyAvatar = ({ size = 40, variant = 'black' }) => {
+const ScoobyyAvatar = ({ size = null, variant = 'black', className = "" }: ScoobyyAvatarProps) => {
   // Styles logic:
   // variant='black' (Yellow on Black): Circle #111111, Stroke #f5c518, Features #f5c518
   // variant='yellow' (Black on Yellow): Circle #f5c518, Stroke #0d0d0d, Features #0d0d0d
@@ -73,11 +77,11 @@ const ScoobyyAvatar = ({ size = 40, variant = 'black' }) => {
 
   return (
     <svg
-      width={size}
-      height={size}
+      width={size || "100%"}
+      height={size || "100%"}
       viewBox="0 0 120 120"
       xmlns="http://www.w3.org/2000/svg"
-      className="scooby-logo"
+      className={`scooby-logo ${className}`}
     >
       <style>{styles}</style>
 

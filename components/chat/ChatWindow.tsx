@@ -4,7 +4,7 @@ import { useState, useRef, useEffect } from "react";
 import { Send, Mic, Sparkles, FileText, Layout, Lightbulb, Loader2, Dog, Volume2, VolumeX, Paperclip, X, Image as ImageIcon } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import MessageBubble from "./MessageBubble";
-import ScoobyAvatarSVG from "@/components/ui/ScoobyAvatarSVG";
+import ScoobyyAvatar from "@/components/ScoobyyAvatar";
 import { getScoobyResponse } from "@/lib/ai";
 import confetti from "canvas-confetti";
 import useSound from "use-sound";
@@ -18,7 +18,7 @@ interface Message {
 export default function ChatWindow({ initialMessage = "" }: { initialMessage?: string }) {
   const { setAvatarState } = useAvatar();
   const [messages, setMessages] = useState<Message[]>([
-    { role: "assistant", content: "Hey! I'm Scooby 🐾 Your BCA buddy. What topic are you stuck on today?" }
+    { role: "assistant", content: "Hey! I'm Scooby Your BCA buddy. What topic are you stuck on today?" }
   ]);
   const [input, setInput] = useState("");
   const [isLoading, setIsLoading] = useState(false);
@@ -274,7 +274,7 @@ export default function ChatWindow({ initialMessage = "" }: { initialMessage?: s
               >
                 <div className="flex flex-col gap-2">
                   <div className="flex items-center gap-4 bg-card/40 backdrop-blur-md border border-white/5 p-4 rounded-2xl rounded-tl-none shadow-xl shadow-cyan-500/5">
-                    <ScoobyAvatarSVG size={40} state="thinking" />
+                    <ScoobyyAvatar size={40} variant="yellow" />
                     <div className="flex items-center gap-1.5">
                       {[0, 1, 2].map((i) => (
                         <motion.div

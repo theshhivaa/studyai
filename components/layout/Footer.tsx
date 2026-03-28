@@ -1,6 +1,6 @@
 import { Dog, Github, Twitter, Linkedin } from "lucide-react";
 import Link from "next/link";
-import ScoobyAvatarSVG from "@/components/ui/ScoobyAvatarSVG";
+import ScoobyyAvatar from "@/components/ScoobyyAvatar";
 
 export default function Footer() {
   return (
@@ -9,13 +9,13 @@ export default function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
           <div className="col-span-1 md:col-span-1">
             <Link href="/" className="flex items-center space-x-2 group mb-4">
-              <ScoobyAvatarSVG size={24} state="idle" />
+              <ScoobyyAvatar size={24} variant="black" />
               <span className="text-xl font-bold font-orbitron tracking-wider bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">
                 Scooby BCA
               </span>
             </Link>
             <p className="text-muted text-sm leading-relaxed">
-              Your AI-powered study companion for the Bachelor of Computer Applications. Powered by Scooby 🐾
+              Your AI-powered study companion for the Bachelor of Computer Applications. Powered by Scooby
             </p>
           </div>
 

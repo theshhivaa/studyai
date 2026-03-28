@@ -16,7 +16,7 @@ export async function getScoobyResponse(
     if (!response.ok) {
       const errorData = await response.json().catch(() => ({}));
       if (errorData.error === "API Key not configured") {
-        return "I'm sorry, but my brain (API Key) isn't connected yet! Please add a GROQ_API_KEY to the .env.local file. 🐾";
+        return "I'm sorry, but my brain (API Key) isn't connected yet! Please add a GROQ_API_KEY to the .env.local file.";
       }
       throw new Error(errorData.message || response.statusText || "Failed to fetch response");
     }
@@ -40,6 +40,6 @@ export async function getScoobyResponse(
     return fullText;
   } catch (error) {
     console.error("Error calling Scooby API:", error);
-    return "Oops! I ran into a bit of a technical glitch. Can you try asking me again? 🐾";
+    return "Oops! I ran into a bit of a technical glitch. Can you try asking me again?";
   }
 }

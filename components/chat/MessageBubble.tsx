@@ -4,7 +4,7 @@ import ReactMarkdown from "react-markdown";
 import { Copy, Check } from "lucide-react";
 import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
-import ScoobyAvatarSVG from "@/components/ui/ScoobyAvatarSVG";
+import ScoobyyAvatar from "@/components/ScoobyyAvatar";
 
 interface MessageBubbleProps {
   role: "user" | "assistant";
@@ -37,8 +37,8 @@ export default function MessageBubble({ role, content }: MessageBubbleProps) {
       <div className={`flex max-w-[85%] md:max-w-[75%] ${role === "user" ? "flex-row-reverse" : "flex-row"} gap-3`}>
         {role === "assistant" && (
           <div className="flex-shrink-0 mt-1">
-            <div className="w-6 h-6 rounded-full border border-border p-1 bg-card">
-              <ScoobyAvatarSVG size={16} state="idle" />
+            <div className="w-8 h-8 rounded-full border border-border flex items-center justify-center p-1 bg-card">
+              <ScoobyyAvatar size={24} variant="yellow" />
             </div>
           </div>
         )}

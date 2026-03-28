@@ -81,7 +81,7 @@ export default function Gamification() {
               <Star size={32} />
             </motion.div>
             <h3 className="text-xl font-bold text-white mb-1 tracking-tight">LEVEL UP!</h3>
-            <p className="text-sm text-cyan-400 font-medium">You reached Level {level} 🐾</p>
+            <p className="text-sm text-cyan-400 font-medium">You reached Level {level}</p>
             <div className="mt-4 flex justify-center gap-1">
               {[...Array(20)].map((_, i) => (
                 <motion.div

@@ -3,7 +3,7 @@
 import { useState, useMemo } from "react";
 import { X, Plus, ChevronDown, ChevronRight } from "lucide-react";
 import { bcaSyllabus } from "@/lib/data/syllabus";
-import ScoobyAvatarSVG from "@/components/ui/ScoobyAvatarSVG";
+import ScoobyyAvatar from "@/components/ScoobyyAvatar";
 
 interface SidebarProps {
   isOpen: boolean;
@@ -41,7 +41,7 @@ export default function Sidebar({ isOpen, onClose, activeTopic, onTopicClick, on
         {/* HEADER */}
         <div className="p-4 flex items-center justify-between">
           <div className="flex items-center gap-2">
-            <ScoobyAvatarSVG size={28} state="idle" />
+            <ScoobyyAvatar size={32} variant="black" />
             <span className="text-white font-medium text-sm tracking-tight">Scooby.AI</span>
           </div>
           <button 

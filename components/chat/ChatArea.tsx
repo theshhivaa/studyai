@@ -4,7 +4,7 @@ import { useState, useRef, useEffect } from "react";
 import { Send, Menu, Sparkles, FileText, Layout, Lightbulb, HelpCircle, Copy, Check, Mic, Paperclip, X } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import MessageBubble from "./MessageBubble";
-import ScoobyAvatarSVG from "@/components/ui/ScoobyAvatarSVG";
+import ScoobyyAvatar from "@/components/ScoobyyAvatar";
 import { useAvatar } from "@/components/context/AvatarContext";
 
 interface Message {
@@ -192,8 +192,8 @@ export default function ChatArea({
               <span className="text-[9px] text-text-muted uppercase tracking-wider">Online</span>
             </div>
           </div>
-          <div className="w-8 h-8 rounded-full border border-border p-1 bg-card">
-            <ScoobyAvatarSVG size={24} state="idle" />
+          <div className="w-11 h-11 rounded-full border border-border p-1 bg-card flex items-center justify-center">
+            <ScoobyyAvatar size={44} variant="yellow" />
           </div>
         </div>
       </header>
@@ -209,11 +209,11 @@ export default function ChatArea({
               initial={{ scale: 0.8, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
               transition={{ duration: 0.5 }}
-              className="mb-6 p-4 rounded-full bg-card border border-border"
+              className="mb-6 p-6 rounded-full bg-card border border-border"
             >
-              <ScoobyAvatarSVG size={60} state="happy" />
+              <ScoobyyAvatar size={160} variant="yellow" />
             </motion.div>
-            <h1 className="text-2xl font-bold text-white mb-2">Hey! I'm Scooby 🐾</h1>
+            <h1 className="text-2xl font-bold text-white mb-2">Hey! I'm Scooby</h1>
             <p className="text-text-muted mb-8 text-sm">Pick a topic or ask me anything about BCA</p>
             
             <div className="flex flex-col sm:flex-row gap-2 w-full justify-center overflow-x-auto pb-2 sm:pb-0 scrollbar-hide">
@@ -245,8 +245,8 @@ export default function ChatArea({
                 animate={{ opacity: 1, y: 0 }}
                 className="flex items-start gap-3"
               >
-                <div className="w-6 h-6 rounded-full border border-border p-1 bg-card flex-shrink-0">
-                  <ScoobyAvatarSVG size={16} state="thinking" />
+                <div className="w-6 h-6 rounded-full border border-border flex items-center justify-center p-0.5 bg-card flex-shrink-0">
+                  <ScoobyyAvatar size={16} variant="yellow" />
                 </div>
                 <div className="bg-card border border-border px-4 py-2 rounded-2xl rounded-tl-none">
                   <div className="flex items-center gap-1.5 h-6">

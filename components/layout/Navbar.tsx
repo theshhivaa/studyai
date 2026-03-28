@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { Dog } from "lucide-react";
 import { useState, useEffect } from "react";
-import ScoobyAvatarSVG from "@/components/ui/ScoobyAvatarSVG";
+import ScoobyyAvatar from "@/components/ScoobyyAvatar";
 
 const navLinks = [
   { name: "Syllabus", href: "/syllabus" },
@@ -32,8 +32,8 @@ export default function Navbar() {
         <div className="flex items-center justify-between">
           {/* Logo */}
           <Link href="/" className="flex items-center space-x-2 group">
-            <div className="bg-primary/20 p-1.5 rounded-lg group-hover:bg-primary/30 transition-colors">
-              <ScoobyAvatarSVG size={28} state="idle" />
+            <div className="bg-primary/20 p-1 rounded-lg group-hover:bg-primary/30 transition-colors flex items-center justify-center">
+              <ScoobyyAvatar size={32} variant="black" />
             </div>
             <span className="text-xl font-bold font-orbitron tracking-wider bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">
               Scooby BCA
@@ -62,11 +62,10 @@ export default function Navbar() {
               <span className="text-sm font-medium hidden sm:block">Student</span>
             </div>
 
-            {/* Mobile */}
             <div className="md:hidden">
               {mounted && (
                 <Link href="/chat" className="text-primary">
-                  <Dog className="w-6 h-6" />
+                  <ScoobyyAvatar size={24} variant="yellow" />
                 </Link>
               )}
             </div>

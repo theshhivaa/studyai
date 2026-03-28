@@ -68,7 +68,7 @@ export default function ChatWindow({ initialMessage = "" }: { initialMessage?: s
     if (soundEnabled) {
       setTimeout(() => playBark(), 1000); // One-time bark
     }
-  }, []);
+  }, [soundEnabled, playBark]);
 
   useEffect(() => {
     if (initialMessage) {
@@ -412,6 +412,10 @@ export default function ChatWindow({ initialMessage = "" }: { initialMessage?: s
             <div className="relative flex-1 group">
               <input
                 type="text"
+                name="scooby-chat-input"
+                autoComplete="off"
+                autoCorrect="off"
+                spellCheck="false"
                 value={input}
                 onChange={(e) => setInput(e.target.value)}
                 placeholder={isRecording ? "Listening..." : "Ask Scooby..."}

@@ -12,9 +12,14 @@ const orbitron = Orbitron({
 });
 
 export const metadata: Metadata = {
-  title: "Scooby BCA | AI Assistant",
+  title: "Scooby.AI",
   description: "Your intelligent study companion for Bachelor of Computer Applications",
-  viewport: "width=device-width, initial-scale=1, maximum-scale=1",
+};
+
+export const viewport = {
+  width: "device-width",
+  initialScale: 1,
+  maximumScale: 1,
 };
 
 export default function RootLayout({
@@ -24,7 +29,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body className={`${inter.variable} ${orbitron.variable} font-sans antialiased text-white min-h-screen bg-[#0a0e1a]`}>
+      <body className={`${inter.variable} ${orbitron.variable} font-sans antialiased text-white min-h-[100dvh] bg-background overscroll-none`}>
         <ThemeProvider>
           <AvatarProvider>
             {children}

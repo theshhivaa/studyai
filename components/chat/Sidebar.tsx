@@ -14,7 +14,7 @@ interface SidebarProps {
 }
 
 export default function Sidebar({ isOpen, onClose, activeTopic, onTopicClick, onNewChat }: SidebarProps) {
-  const [openSemester, setOpenSemester] = useState<number | null>(1);
+  const [openSemester, setOpenSemester] = useState<number | null>(null);
 
   return (
     <>

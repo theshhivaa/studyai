@@ -32,13 +32,55 @@ export default function Home() {
     }
   }, [messages, activeTopic]);
 
+  const handleSendMessage = async (text: string, currentMessages: any[] = messages) => {
+    if (!text.trim() || isLoading) return;
+
+    const userMessage = { role: "user", content: text };
+    const history = currentMessages.map(m => ({
+      role: m.role,
+      parts: m.content
+    }));
+
+    setMessages([...currentMessages, userMessage]);
+    setIsLoading(true);
+
+    // Add empty assistant message for streaming
+    setMessages(prev => [...prev, { role: "assistant", content: "" }]);
+
+    try {
+      const { getScoobyResponse } = await import("@/lib/ai");
+      await getScoobyResponse(
+        text,
+        history,
+        undefined,
+        (chunk) => {
+          setMessages(prev => {
+            const lastMessage = prev[prev.length - 1];
+            if (lastMessage && lastMessage.role === "assistant") {
+              const updatedMessages = [...prev];
+              updatedMessages[updatedMessages.length - 1] = {
+                ...lastMessage,
+                content: lastMessage.content + chunk
+              };
+              return updatedMessages;
+            }
+            return prev;
+          });
+        }
+      );
+    } catch (error) {
+      console.error("Chat error:", error);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
   const handleTopicClick = (topic: string, subject: string) => {
     setActiveTopic(topic);
     const initialPrompt = `Explain ${topic} from my BCA syllabus`;
     
-    // Clear current messages and start new one
-    const newUserMessage = { role: "user", content: initialPrompt };
-    setMessages([newUserMessage]);
+    // Trigger the AI response with empty history
+    handleSendMessage(initialPrompt, []);
     
     // Close sidebar on mobile
     if (window.innerWidth < 768) {
@@ -66,6 +108,7 @@ export default function Home() {
         onToggleSidebar={() => setIsSidebarOpen(!isSidebarOpen)}
         activeTopic={activeTopic}
         onTopicClick={handleTopicClick}
+        handleSendMessage={handleSendMessage}
         messages={messages}
         setMessages={setMessages}
         isLoading={isLoading}

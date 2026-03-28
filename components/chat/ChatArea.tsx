@@ -5,7 +5,6 @@ import { Send, Menu, Sparkles, FileText, Layout, Lightbulb, HelpCircle, Copy, Ch
 import { motion, AnimatePresence } from "framer-motion";
 import MessageBubble from "./MessageBubble";
 import ScoobyAvatarSVG from "@/components/ui/ScoobyAvatarSVG";
-import { getScoobyResponse } from "@/lib/ai";
 
 interface Message {
   role: "user" | "assistant";
@@ -16,6 +15,7 @@ interface ChatAreaProps {
   onToggleSidebar: () => void;
   activeTopic: string;
   onTopicClick: (topic: string, subject: string) => void;
+  handleSendMessage: (text: string, currentMessages?: Message[]) => Promise<void>;
   messages: Message[];
   setMessages: React.Dispatch<React.SetStateAction<Message[]>>;
   isLoading: boolean;
@@ -26,6 +26,7 @@ export default function ChatArea({
   onToggleSidebar, 
   activeTopic, 
   onTopicClick, 
+  handleSendMessage,
   messages, 
   setMessages, 
   isLoading, 
@@ -44,44 +45,8 @@ export default function ChatArea({
     const messageText = text || input;
     if (!messageText.trim() || isLoading) return;
 
-    const userMessage: Message = { role: "user", content: messageText };
-    setMessages(prev => [...prev, userMessage]);
-    setInput("");
-    setIsLoading(true);
-
-    const history = messages.map(m => ({
-      role: m.role,
-      parts: m.content
-    }));
-
-    // Add empty assistant message for streaming
-    setMessages(prev => [...prev, { role: "assistant", content: "" }]);
-
-    try {
-      await getScoobyResponse(
-        messageText, 
-        history, 
-        undefined, 
-        (chunk) => {
-          setMessages(prev => {
-            const lastMessage = prev[prev.length - 1];
-            if (lastMessage && lastMessage.role === "assistant") {
-              const updatedMessages = [...prev];
-              updatedMessages[updatedMessages.length - 1] = {
-                ...lastMessage,
-                content: lastMessage.content + chunk
-              };
-              return updatedMessages;
-            }
-            return prev;
-          });
-        }
-      );
-    } catch (error) {
-      console.error("Chat error:", error);
-    } finally {
-      setIsLoading(false);
-    }
+    if (!text) setInput(""); // Clear input if sending from form
+    await handleSendMessage(messageText);
   };
 
   const quickActions = [

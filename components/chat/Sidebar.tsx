@@ -36,7 +36,7 @@ export default function Sidebar({ isOpen, onClose, activeTopic, onTopicClick, on
 
       {/* Sidebar Container */}
       <aside 
-        className={`fixed md:relative top-0 left-0 h-full w-[260px] bg-sidebar-bg border-r border-border z-50 transition-transform duration-300 ease-in-out flex flex-col ${isOpen ? "translate-x-0" : "-translate-x-full md:translate-x-0"}`}
+        className={`fixed md:relative top-0 left-0 h-full w-[260px] bg-sidebar/95 backdrop-blur-xl border-r border-border z-50 transition-transform duration-300 ease-in-out flex flex-col ${isOpen ? "translate-x-0" : "-translate-x-full md:translate-x-0"}`}
       >
         {/* HEADER */}
         <div className="p-4 flex items-center justify-between">

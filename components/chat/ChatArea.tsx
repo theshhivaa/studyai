@@ -1,10 +1,11 @@
 "use client";
 
 import { useState, useRef, useEffect } from "react";
-import { Send, Menu, Sparkles, FileText, Layout, Lightbulb, HelpCircle, Copy, Check } from "lucide-react";
+import { Send, Menu, Sparkles, FileText, Layout, Lightbulb, HelpCircle, Copy, Check, Mic } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import MessageBubble from "./MessageBubble";
 import ScoobyAvatarSVG from "@/components/ui/ScoobyAvatarSVG";
+import { useAvatar } from "@/components/context/AvatarContext";
 
 interface Message {
   role: "user" | "assistant";
@@ -32,8 +33,61 @@ export default function ChatArea({
   isLoading, 
   setIsLoading 
 }: ChatAreaProps) {
+  const { setAvatarState } = useAvatar();
   const [input, setInput] = useState("");
+  const [isRecording, setIsRecording] = useState(false);
   const scrollRef = useRef<HTMLDivElement>(null);
+  const recognitionRef = useRef<any>(null);
+
+  // Setup Voice Recognition
+  useEffect(() => {
+    const SpeechRecognition = (window as any).SpeechRecognition || (window as any).webkitSpeechRecognition;
+    if (SpeechRecognition) {
+      recognitionRef.current = new SpeechRecognition();
+      recognitionRef.current.continuous = true;
+      recognitionRef.current.interimResults = true;
+
+      recognitionRef.current.onresult = (event: any) => {
+        let transcript = "";
+        for (let i = event.resultIndex; i < event.results.length; i++) {
+          transcript += event.results[i][0].transcript;
+        }
+        setInput(transcript);
+      };
+
+      recognitionRef.current.onerror = (event: any) => {
+        console.error("Speech recognition error:", event.error);
+        setIsRecording(false);
+      };
+
+      recognitionRef.current.onend = () => {
+        setIsRecording(false);
+      };
+    }
+
+    return () => {
+      if (recognitionRef.current) {
+        recognitionRef.current.stop();
+      }
+    };
+  }, []);
+
+  const toggleRecording = () => {
+    if (isRecording) {
+      recognitionRef.current?.stop();
+      setIsRecording(false);
+      setAvatarState("idle");
+    } else {
+      try {
+        recognitionRef.current?.start();
+        setIsRecording(true);
+        setAvatarState("listening");
+        setTimeout(() => setAvatarState("happy"), 1000);
+      } catch (error) {
+        console.error("Failed to start recording:", error);
+      }
+    }
+  };
 
   useEffect(() => {
     if (scrollRef.current) {
@@ -45,8 +99,14 @@ export default function ChatArea({
     const messageText = text || input;
     if (!messageText.trim() || isLoading) return;
 
+    if (isRecording) {
+      recognitionRef.current?.stop();
+      setIsRecording(false);
+    }
+
     if (!text) setInput(""); // Clear input if sending from form
     await handleSendMessage(messageText);
+    setAvatarState("thinking");
   };
 
   const quickActions = [
@@ -186,17 +246,41 @@ export default function ChatArea({
                 type="text"
                 value={input}
                 onChange={(e) => setInput(e.target.value)}
-                placeholder="Ask Scooby anything..."
-                className="w-full bg-card border border-border focus:border-primary rounded-xl py-3.5 pl-4 pr-12 text-sm text-white placeholder:text-text-muted focus:ring-4 focus:ring-primary/20 transition-all outline-none shadow-sm focus:shadow-yellow/10"
+                placeholder={isRecording ? "Listening..." : "Ask Scooby anything..."}
+                className={`w-full bg-card border rounded-xl py-3.5 pl-4 pr-12 text-sm text-white placeholder:text-text-muted transition-all outline-none shadow-sm ${
+                  isRecording 
+                    ? "border-primary ring-4 ring-primary/20 shadow-yellow/10" 
+                    : "border-border focus:border-primary focus:ring-4 focus:ring-primary/20 focus:shadow-yellow/10"
+                }`}
               />
-              <div className="absolute right-2 top-1/2 -translate-y-1/2">
-                <button
-                  type="submit"
-                  disabled={!input.trim() || isLoading}
-                  className="w-9 h-9 flex items-center justify-center rounded-full bg-primary text-black hover:bg-secondary disabled:bg-border disabled:text-text-muted transition-all active:scale-90"
-                >
-                  <Send size={18} fill="currentColor" />
-                </button>
+              <div className="absolute right-2 top-1/2 -translate-y-1/2 flex items-center gap-1">
+                {input.trim() ? (
+                  <button
+                    type="submit"
+                    disabled={isLoading}
+                    className="w-9 h-9 flex items-center justify-center rounded-full bg-primary text-black hover:bg-secondary transition-all active:scale-90"
+                  >
+                    <Send size={18} fill="currentColor" />
+                  </button>
+                ) : (
+                  <button
+                    type="button"
+                    onClick={toggleRecording}
+                    className={`w-9 h-9 flex items-center justify-center rounded-full transition-all active:scale-95 relative ${
+                      isRecording 
+                        ? "bg-red-500 text-white shadow-[0_0_15px_rgba(239,68,68,0.4)]" 
+                        : "bg-white/5 text-text-muted hover:text-primary hover:bg-primary/10"
+                    }`}
+                  >
+                    <Mic size={18} />
+                    {isRecording && (
+                      <span className="absolute -top-1 -right-1 flex h-3 w-3">
+                        <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-75"></span>
+                        <span className="relative inline-flex rounded-full h-2 w-2 bg-red-500"></span>
+                      </span>
+                    )}
+                  </button>
+                )}
               </div>
             </div>
           </form>

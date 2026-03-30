@@ -1,4 +1,4 @@
-import { Dog, Github, Twitter, Linkedin } from "lucide-react";
+import { Dog, Github, Twitter, Linkedin, Smartphone } from "lucide-react";
 import Link from "next/link";
 import ScoobyyAvatar from "@/components/ScoobyyAvatar";
 
@@ -25,6 +25,13 @@ export default function Footer() {
               <li><Link href="/syllabus" className="hover:text-primary transition-colors">Syllabus</Link></li>
               <li><Link href="/chat" className="hover:text-primary transition-colors">Ask Scooby</Link></li>
               <li><Link href="/about" className="hover:text-primary transition-colors">About Us</Link></li>
+              <li>
+                <Link href="/download" className="hover:text-primary transition-colors inline-flex items-center gap-1.5 group">
+                  <Smartphone className="w-3.5 h-3.5 text-yellow-500/70 group-hover:text-primary transition-colors" />
+                  <span>Download App</span>
+                  <span className="text-[10px] bg-yellow-500/15 text-yellow-400 border border-yellow-500/20 rounded-full px-1.5 py-0.5 font-medium">APK</span>
+                </Link>
+              </li>
             </ul>
           </div>
 

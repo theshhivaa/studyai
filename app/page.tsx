@@ -3,6 +3,7 @@
 import { useState, useEffect } from "react";
 import Sidebar from "@/components/chat/Sidebar";
 import ChatArea from "@/components/chat/ChatArea";
+import { bcaSyllabus } from "@/lib/data/syllabus";
 
 export default function Home() {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
@@ -79,9 +80,29 @@ export default function Home() {
     }
   };
 
-  const handleTopicClick = (topic: string, subject: string) => {
-    setActiveTopic(topic);
-    const initialPrompt = `Explain ${topic} from my BCA syllabus`;
+  const handleTopicClick = (topicName: string, subjectName: string) => {
+    setActiveTopic(topicName);
+    
+    // Find context from syllabus
+    let context = "";
+    let subtopics = "";
+    for (const sem of bcaSyllabus) {
+      const subject = sem.subjects.find(s => s.name === subjectName);
+      if (subject) {
+        const module = subject.modules?.find(m => m.topics.includes(topicName) || m.name === topicName);
+        if (module) {
+          context = `[Context: Semester ${sem.number}, Subject: ${subject.name}, Module: ${module.name}]`;
+          if (module.name === topicName) {
+            subtopics = ` This module includes the following topics: ${module.topics.join(", ")}. Please provide a comprehensive overview.`;
+          }
+        } else {
+          context = `[Context: Semester ${sem.number}, Subject: ${subject.name}]`;
+        }
+        break;
+      }
+    }
+
+    const initialPrompt = `${context ? context + " " : ""}Explain ${topicName} from my BCA syllabus.${subtopics} Style: Standard.`;
     
     // Trigger the AI response with empty history
     handleSendMessage(initialPrompt, []);

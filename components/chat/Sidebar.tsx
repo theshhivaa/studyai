@@ -1,7 +1,8 @@
 "use client";
 
 import { useState, useMemo } from "react";
-import { X, Plus, ChevronDown, ChevronRight } from "lucide-react";
+import { X, Plus, ChevronDown, ChevronRight, Download, Smartphone } from "lucide-react";
+import Link from "next/link";
 import { bcaSyllabus } from "@/lib/data/syllabus";
 import ScoobyyAvatar from "@/components/ScoobyyAvatar";
 
@@ -104,12 +105,16 @@ export default function Sidebar({ isOpen, onClose, activeTopic, onTopicClick, on
                         {subject.modules.map((module, mIdx) => (
                           <div key={`${subject.id}-${mIdx}`}>
                             <button
-                              onClick={() => setOpenModule(openModule === `${subject.id}-${mIdx}` ? null : `${subject.id}-${mIdx}`)}
-                              className={`w-full text-left px-4 py-1.5 text-[11px] font-bold uppercase tracking-wider flex items-center justify-between ${
-                                openModule === `${subject.id}-${mIdx}` ? "text-muted-yellow" : "text-text-muted hover:text-white"
+                              onClick={() => {
+                                const isOpening = openModule !== `${subject.id}-${mIdx}`;
+                                setOpenModule(isOpening ? `${subject.id}-${mIdx}` : null);
+                                if (isOpening) onTopicClick(module.name, subject.name);
+                              }}
+                              className={`w-full text-left px-4 py-2 text-[11px] font-bold uppercase tracking-wider flex items-center justify-between transition-all duration-200 hover:bg-white/5 active:scale-[0.98] ${
+                                openModule === `${subject.id}-${mIdx}` ? "text-primary bg-primary/5" : "text-text-muted hover:text-white"
                               }`}
                             >
-                              <span className="truncate pr-2">{module.name.split(":")[0]}</span>
+                              <span className="truncate pr-2">{module.name}</span>
                               {openModule === `${subject.id}-${mIdx}` ? <ChevronDown size={10} /> : <ChevronRight size={10} />}
                             </button>
 
@@ -142,8 +147,25 @@ export default function Sidebar({ isOpen, onClose, activeTopic, onTopicClick, on
           ))}
         </div>
 
+        {/* DOWNLOAD APP BANNER */}
+        <div className="px-3 py-3 border-t border-border">
+          <Link
+            href="/download"
+            className="group flex items-center gap-3 w-full bg-gradient-to-r from-yellow-500/10 to-amber-500/5 hover:from-yellow-500/20 hover:to-amber-500/10 border border-yellow-500/20 hover:border-yellow-500/40 rounded-xl px-3 py-2.5 transition-all duration-300"
+          >
+            <div className="flex-shrink-0 w-8 h-8 rounded-lg bg-yellow-500/15 flex items-center justify-center">
+              <Smartphone className="w-4 h-4 text-yellow-400" />
+            </div>
+            <div className="flex-1 min-w-0">
+              <p className="text-[11px] font-bold text-yellow-400 leading-tight">Get the App</p>
+              <p className="text-[10px] text-gray-500 leading-tight mt-0.5 truncate">Download Scooby AI for Android</p>
+            </div>
+            <Download className="w-3.5 h-3.5 text-yellow-500/60 group-hover:text-yellow-400 flex-shrink-0 group-hover:animate-bounce transition-colors" />
+          </Link>
+        </div>
+
         {/* BOTTOM ATTRIBUTION */}
-        <div className="p-4 border-t border-border">
+        <div className="px-4 pb-4">
           <div className="text-[10px] text-[#333333] space-y-1">
             <p>Developed by Shiva Prasad S</p>
             <p>© 2026 Scooby.AI</p>

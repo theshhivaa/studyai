@@ -157,7 +157,9 @@ export default function ChatArea({
   };
 
   const quickActions = [
-    { label: "📝 Notes", prompt: "Can you generate detailed notes on this topic?" },
+    { label: "📝 Brief Notes", prompt: "Can you generate brief notes on this topic? Style: Brief" },
+    { label: "📖 Standard Notes", prompt: "Can you generate standard modular notes on this topic? Style: Standard" },
+    { label: "📚 Detailed Notes", prompt: "Can you generate comprehensive detailed notes on this topic? Style: Detailed" },
     { label: "📊 Diagram", prompt: "Can you create a diagram or flowchart for this?" },
     { label: "💡 Examples", prompt: "Can you give me some real-world examples of this?" },
     { label: "❓ Quiz", prompt: "Can you quiz me on this topic?" },
@@ -275,11 +277,11 @@ export default function ChatArea({
             {quickActions.map((action) => (
               <button
                 key={action.label}
-                onClick={() => setInput(prev => action.label.split(" ")[1] + " " + prev)}
+                onClick={() => handleSend(action.prompt)}
                 className="whitespace-nowrap px-3 py-1.5 rounded-full bg-card border border-border text-[11px] text-text-muted hover:text-primary transition-colors flex items-center gap-1.5 group"
               >
                 <span className="group-hover:scale-110 transition-transform">{action.label.split(" ")[0]}</span>
-                <span>{action.label.split(" ")[1]}</span>
+                <span>{action.label.split(" ").slice(1).join(" ")}</span>
               </button>
             ))}
           </div>

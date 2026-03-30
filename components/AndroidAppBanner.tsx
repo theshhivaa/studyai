@@ -11,6 +11,21 @@ export default function AndroidAppBanner() {
   const [animateIn, setAnimateIn] = useState(false);
 
   useEffect(() => {
+    // Detect environment
+    const ua = navigator.userAgent;
+    const isAndroid = /Android/i.test(ua);
+    const isWebView = /wv/i.test(ua) || /Version\/4.0/i.test(ua);
+    const isStandalone = window.matchMedia('(display-mode: standalone)').matches;
+
+    // We only want the popup on the website (regular mobile browser) for Android users.
+    // Skip if:
+    // 1. Not an Android device
+    // 2. Already in the app (WebView)
+    // 3. Already in PWA standalone mode
+    if (!isAndroid || isWebView || isStandalone) {
+      return;
+    }
+
     // Don't show if already dismissed in this session
     const dismissed = sessionStorage.getItem(DISMISSED_KEY);
     if (dismissed) return;

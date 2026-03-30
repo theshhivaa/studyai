@@ -15,10 +15,13 @@ export async function getScoobyResponse(
 
     if (!response.ok) {
       const errorData = await response.json().catch(() => ({}));
-      if (errorData.error === "API Key not configured") {
-        return "I'm sorry, but my brain (API Key) isn't connected yet! Please add a GROQ_API_KEY to the .env.local file.";
+      const errorMessage = errorData.message || errorData.error || response.statusText || `Server Error (${response.status})`;
+      
+      if (errorMessage.includes("API Key not configured") || errorMessage.includes("GROQ_API_KEY is missing")) {
+        return "I'm sorry, but my brain (API Key) isn't connected yet! Please add a **GROQ_API_KEY** to your Vercel Project Settings (Environment Variables) and redeploy.";
       }
-      throw new Error(errorData.message || response.statusText || "Failed to fetch response");
+      
+      throw new Error(errorMessage);
     }
 
     const reader = response.body?.getReader();

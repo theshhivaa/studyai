@@ -33,7 +33,10 @@ Always maintain the Scooby persona. Use emojis sparingly (e.g., 📝, 💡, 🐾
 export async function POST(request: Request) {
   const apiKey = process.env.GROQ_API_KEY;
   if (!apiKey) {
-    return NextResponse.json({ error: "API Key not configured" }, { status: 500 });
+    return NextResponse.json(
+      { error: "API Key not configured", message: "GROQ_API_KEY is missing from environment variables. Please add it to your project settings." }, 
+      { status: 500 }
+    );
   }
 
   const groq = new Groq({ apiKey });

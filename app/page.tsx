@@ -54,7 +54,7 @@ export default function Home() {
 
     try {
       const { getScoobyResponse } = await import("@/lib/ai");
-      await getScoobyResponse(
+      const fullResponse = await getScoobyResponse(
         text,
         history,
         fileData,
@@ -73,6 +73,22 @@ export default function Home() {
           });
         }
       );
+
+      // If streaming didn't happen or was incomplete, and we have a fullResponse (like an error message)
+      if (fullResponse) {
+        setMessages(prev => {
+          const lastMessage = prev[prev.length - 1];
+          if (lastMessage && lastMessage.role === "assistant" && !lastMessage.content) {
+            const updatedMessages = [...prev];
+            updatedMessages[updatedMessages.length - 1] = {
+              ...lastMessage,
+              content: fullResponse
+            };
+            return updatedMessages;
+          }
+          return prev;
+        });
+      }
     } catch (error) {
       console.error("Chat error:", error);
     } finally {

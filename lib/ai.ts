@@ -25,21 +25,27 @@ export async function getScoobyResponse(
     const decoder = new TextDecoder();
     let fullText = "";
 
-    if (reader) {
-      while (true) {
-        const { done, value } = await reader.read();
-        if (done) break;
-        const chunk = decoder.decode(value);
-        fullText += chunk;
-        if (onChunk) {
-          onChunk(chunk);
-        }
+    if (!reader) {
+      const text = await response.text();
+      return text || "I received an empty response from the server. Please try again.";
+    }
+
+    while (true) {
+      const { done, value } = await reader.read();
+      if (done) break;
+      const chunk = decoder.decode(value);
+      fullText += chunk;
+      if (onChunk) {
+        onChunk(chunk);
       }
     }
 
     return fullText;
-  } catch (error) {
+  } catch (error: any) {
     console.error("Error calling Scooby API:", error);
-    return "Oops! I ran into a bit of a technical glitch. Can you try asking me again?";
+    if (error.message?.includes("Failed to fetch")) {
+      return "I'm having trouble connecting to my brain right now. Please check your internet connection or try again later!";
+    }
+    return error.message || "Oops! I ran into a bit of a technical glitch. Can you try asking me again?";
   }
 }

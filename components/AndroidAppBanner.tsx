@@ -22,7 +22,7 @@ export default function AndroidAppBanner() {
     // 1. Not an Android device
     // 2. Already in the app (WebView)
     // 3. Already in PWA standalone mode
-    if (!isAndroid || isWebView || isStandalone) {
+    if (isWebView || isStandalone) {
       return;
     }
 

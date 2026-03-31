@@ -172,7 +172,7 @@ export default function ChatArea({
   ];
 
   return (
-    <div className="flex-1 flex flex-col min-h-0 bg-background relative overflow-hidden">
+    <div className="flex-1 flex flex-col min-h-0 bg-background relative overflow-x-hidden">
       {/* TOP BAR */}
       <header className="h-14 border-b border-border flex items-center justify-between px-4 z-20 bg-background/80 backdrop-blur-md sticky top-0">
         <button 
@@ -234,7 +234,7 @@ export default function ChatArea({
             </div>
           </div>
         ) : (
-          <div className="max-w-4xl mx-auto w-full space-y-6">
+          <div className="max-w-4xl mx-auto w-full min-w-0 space-y-6">
             <AnimatePresence initial={false}>
               {messages.map((msg, i) => (
                 <MessageBubble key={i} role={msg.role} content={msg.content} />

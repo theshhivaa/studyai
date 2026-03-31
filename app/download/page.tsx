@@ -68,8 +68,8 @@ export default function DownloadPage() {
       setDownloaded(true);
       // Trigger actual download
       const a = document.createElement("a");
-      a.href = "/scooby-bca.apk";
-      a.download = "ScoobyBCA.apk";
+      a.href = "/scoobyai.apk";
+      a.download = "ScoobyAI.apk";
       document.body.appendChild(a);
       a.click();
       document.body.removeChild(a);

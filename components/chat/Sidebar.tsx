@@ -108,7 +108,6 @@ export default function Sidebar({ isOpen, onClose, activeTopic, onTopicClick, on
                               onClick={() => {
                                 const isOpening = openModule !== `${subject.id}-${mIdx}`;
                                 setOpenModule(isOpening ? `${subject.id}-${mIdx}` : null);
-                                if (isOpening) onTopicClick(module.name, subject.name);
                               }}
                               className={`w-full text-left px-4 py-2 text-[11px] font-bold uppercase tracking-wider flex items-center justify-between transition-all duration-200 hover:bg-white/5 active:scale-[0.98] ${
                                 openModule === `${subject.id}-${mIdx}` ? "text-primary bg-primary/5" : "text-text-muted hover:text-white"

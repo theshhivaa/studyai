@@ -51,7 +51,7 @@ export default function MessageBubble({ role, content }: MessageBubbleProps) {
                 : "bg-card border border-border text-white rounded-tl-none shadow-xl"
             }`}
           >
-            <div className={`prose prose-invert max-w-none text-[14px] leading-relaxed break-words overflow-hidden ${role === "user" ? "selection:bg-black/10" : "selection:bg-primary/30"}`}>
+            <div className={`${role === "assistant" ? "prose prose-invert" : "prose text-black"} max-w-none text-[14px] leading-relaxed break-words overflow-hidden ${role === "user" ? "selection:bg-black/10" : "selection:bg-primary/30"}`}>
               <ReactMarkdown
                 components={{
                   h1: ({...props}) => <h1 className="text-lg font-bold mb-2 mt-4 first:mt-0" {...props} />,

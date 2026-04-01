@@ -12,9 +12,10 @@ const prismaClientSingleton = () => {
   }
   
   // Configure the Neon Driver Adapter for Prisma 7
-  // This is now mandatory for direct connections where the URL is not in the schema.
+  // We use a type cast to 'any' for the pool instance to resolve a TypeScript mismatch
+  // between different minor versions of the Neon serverless driver and the Prisma adapter.
   const pool = new Pool({ connectionString: url });
-  const adapter = new PrismaNeon(pool, { webSocketConstructor: ws });
+  const adapter = new PrismaNeon(pool as any, { webSocketConstructor: ws as any });
   
   return new PrismaClient({ 
     adapter,

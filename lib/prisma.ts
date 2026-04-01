@@ -1,7 +1,11 @@
 import { PrismaClient } from "@prisma/client";
 import { PrismaNeon } from "@prisma/adapter-neon";
-import { Pool } from "@neondatabase/serverless";
+import { Pool, neonConfig } from "@neondatabase/serverless";
 import ws from "ws";
+
+// Correct configuration for Neon Serverless v1.0+
+// Direct assignment of the WebSocket constructor is required for environments like Vercel
+neonConfig.webSocketConstructor = ws;
 
 const prismaClientSingleton = () => {
   // Use the pooled URL from Vercel/Neon integration with fallbacks
@@ -12,10 +16,11 @@ const prismaClientSingleton = () => {
   }
   
   // Configure the Neon Driver Adapter for Prisma 7
-  // We use a type cast to 'any' for the pool instance to resolve a TypeScript mismatch
-  // between different minor versions of the Neon serverless driver and the Prisma adapter.
   const pool = new Pool({ connectionString: url });
-  const adapter = new PrismaNeon(pool as any, { webSocketConstructor: ws as any });
+  
+  // In the latest adapter-neon, the constructor only takes the pool instance.
+  // WebSocket configuration is handled globally via neonConfig above.
+  const adapter = new PrismaNeon(pool as any);
   
   return new PrismaClient({ 
     adapter,
@@ -30,11 +35,6 @@ const globalForPrisma = globalThis as unknown as {
 };
 
 const getPrisma = (): PrismaClientSingleton => {
-  // Prevent initialization during the build phase in Next.js 15+
-  if (process.env.NEXT_PHASE === "phase-production-build") {
-    return {} as any;
-  }
-
   if (!globalForPrisma.prisma) {
     globalForPrisma.prisma = prismaClientSingleton();
   }

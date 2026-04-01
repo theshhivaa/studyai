@@ -4,6 +4,8 @@ import "./globals.css";
 import { ThemeProvider } from "@/components/ThemeProvider";
 import { AvatarProvider } from "@/components/context/AvatarContext";
 import AndroidAppBanner from "@/components/AndroidAppBanner";
+import { Providers } from "@/components/Providers";
+import { AuthGuard } from "@/components/auth/AuthGuard";
 
 const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
 const orbitron = Orbitron({
@@ -61,12 +63,16 @@ export default function RootLayout({
         <link rel="apple-touch-icon" href="/favicon.png" />
       </head>
       <body className={`${inter.variable} ${orbitron.variable} font-sans antialiased text-white min-h-[100dvh] bg-background overscroll-none`}>
-        <ThemeProvider>
-          <AvatarProvider>
-            <AndroidAppBanner />
-            {children}
-          </AvatarProvider>
-        </ThemeProvider>
+        <Providers>
+          <AuthGuard>
+            <ThemeProvider>
+              <AvatarProvider>
+                <AndroidAppBanner />
+                {children}
+              </AvatarProvider>
+            </ThemeProvider>
+          </AuthGuard>
+        </Providers>
       </body>
     </html>
   );

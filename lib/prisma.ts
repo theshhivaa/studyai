@@ -3,28 +3,28 @@ import { PrismaNeon } from "@prisma/adapter-neon";
 import { Pool, neonConfig } from "@neondatabase/serverless";
 import ws from "ws";
 
-// Correct configuration for Neon Serverless v1.0+
-// Direct assignment of the WebSocket constructor is required for environments like Vercel
+// Standard configuration for Neon Serverless v1.0+
 neonConfig.webSocketConstructor = ws;
 
 const prismaClientSingleton = () => {
-  // Use the pooled URL from Vercel/Neon integration with fallbacks
+  // Use the pooled URL from Vercel/Neon integration
   let url = process.env.POSTGRES_PRISMA_URL || process.env.DATABASE_URL || process.env.POSTGRES_URL;
   
   if (process.env.NODE_ENV === "production" && !url) {
     console.error("PRISMA ERROR: No connection URL found in production env.");
   }
 
-  // Force secure SSL mode for production Neon connections
+  // Ensure 'sslmode=require' is present in the string
   if (url && !url.includes("sslmode=")) {
     const separator = url.includes("?") ? "&" : "?";
     url = `${url}${separator}sslmode=require`;
   }
   
-  // Configure the Neon Driver Adapter for Prisma 7
-  // Use a connection limit suitable for serverless functions
+  // Use a string-only constructor pattern to resolve the 'TypeError' in the Neon driver.
+  // We explicitly set 'ssl: true' as a boolean to satisfy the handshake requirement in serverless.
   const pool = new Pool({ 
     connectionString: url,
+    ssl: true, 
     max: 10,
   });
   
@@ -43,7 +43,6 @@ const globalForPrisma = globalThis as unknown as {
 };
 
 const getPrisma = (): PrismaClientSingleton => {
-  // Prevent initialization during the build phase in Next.js 15+
   if (process.env.NEXT_PHASE === "phase-production-build") {
     return {} as any;
   }

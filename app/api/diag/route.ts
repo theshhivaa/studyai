@@ -15,6 +15,7 @@ export async function GET() {
 
   const pool = new Pool({ 
     connectionString: url,
+    ssl: true, 
     max: 10,
   });
   const adapter = new PrismaNeon(pool as any);
@@ -30,23 +31,10 @@ export async function GET() {
   try {
     const userCount = await prisma.user.count();
     diagnostics.userCount = userCount;
-    
-    if (userCount > 0) {
-      const lastUser = await prisma.user.findFirst({
-        orderBy: { id: 'desc' }
-      });
-      diagnostics.lastUser = {
-        name: lastUser?.name,
-        email: lastUser?.email?.charAt(0) + "..." // Privacy
-      };
-    }
-    
-    diagnostics.accountCount = await prisma.account.count();
-    diagnostics.status = "SUCCESS - Database connected successfully";
-
+    diagnostics.status = "SUCCESS";
   } catch (error: any) {
     diagnostics.error = error.message;
-    diagnostics.status = "ERROR - Connection failed";
+    diagnostics.status = "ERROR";
   } finally {
     await prisma.$disconnect();
   }

@@ -9,17 +9,25 @@ neonConfig.webSocketConstructor = ws;
 
 const prismaClientSingleton = () => {
   // Use the pooled URL from Vercel/Neon integration with fallbacks
-  const url = process.env.POSTGRES_PRISMA_URL || process.env.DATABASE_URL || process.env.POSTGRES_URL;
+  let url = process.env.POSTGRES_PRISMA_URL || process.env.DATABASE_URL || process.env.POSTGRES_URL;
   
   if (process.env.NODE_ENV === "production" && !url) {
     console.error("PRISMA ERROR: No connection URL found in production env.");
   }
+
+  // Force secure SSL mode for production Neon connections
+  if (url && !url.includes("sslmode=")) {
+    const separator = url.includes("?") ? "&" : "?";
+    url = `${url}${separator}sslmode=require`;
+  }
   
   // Configure the Neon Driver Adapter for Prisma 7
-  const pool = new Pool({ connectionString: url });
+  // Use a connection limit suitable for serverless functions
+  const pool = new Pool({ 
+    connectionString: url,
+    max: 10,
+  });
   
-  // In the latest adapter-neon, the constructor only takes the pool instance.
-  // WebSocket configuration is handled globally via neonConfig above.
   const adapter = new PrismaNeon(pool as any);
   
   return new PrismaClient({ 
@@ -35,6 +43,11 @@ const globalForPrisma = globalThis as unknown as {
 };
 
 const getPrisma = (): PrismaClientSingleton => {
+  // Prevent initialization during the build phase in Next.js 15+
+  if (process.env.NEXT_PHASE === "phase-production-build") {
+    return {} as any;
+  }
+
   if (!globalForPrisma.prisma) {
     globalForPrisma.prisma = prismaClientSingleton();
   }

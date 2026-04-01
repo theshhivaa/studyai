@@ -1,4 +1,7 @@
 import { PrismaClient } from "@prisma/client";
+import { PrismaNeon } from "@prisma/adapter-neon";
+import { Pool } from "@neondatabase/serverless";
+import ws from "ws";
 
 const prismaClientSingleton = () => {
   // Use the pooled URL from Vercel/Neon integration with fallbacks
@@ -8,20 +11,15 @@ const prismaClientSingleton = () => {
     console.error("PRISMA ERROR: No connection URL found in production env.");
   }
   
-  const config: any = {
-    log: process.env.NODE_ENV === "development" ? ["query", "error", "warn"] : ["error"],
-  };
-
-  // Correct constructor property for direct database connections in Prisma 7
-  if (url) {
-    config.datasources = {
-      db: {
-        url: url,
-      },
-    };
-  }
+  // Configure the Neon Driver Adapter for Prisma 7
+  // This is now mandatory for direct connections where the URL is not in the schema.
+  const pool = new Pool({ connectionString: url });
+  const adapter = new PrismaNeon(pool, { webSocketConstructor: ws });
   
-  return new PrismaClient(config);
+  return new PrismaClient({ 
+    adapter,
+    log: process.env.NODE_ENV === "development" ? ["query", "error", "warn"] : ["error"],
+  });
 };
 
 type PrismaClientSingleton = ReturnType<typeof prismaClientSingleton>;

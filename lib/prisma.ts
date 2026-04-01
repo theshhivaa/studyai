@@ -12,10 +12,13 @@ const prismaClientSingleton = () => {
     log: process.env.NODE_ENV === "development" ? ["query", "error", "warn"] : ["error"],
   };
 
-  // Only assign datasourceUrl if we have a valid string. 
-  // In Prisma 7, passing undefined/null/empty can cause an initialization crash.
+  // Correct constructor property for direct database connections in Prisma 7
   if (url) {
-    config.datasourceUrl = url;
+    config.datasources = {
+      db: {
+        url: url,
+      },
+    };
   }
   
   return new PrismaClient(config);

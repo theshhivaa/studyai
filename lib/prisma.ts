@@ -1,22 +1,24 @@
 import { PrismaClient } from "@prisma/client";
 
 const prismaClientSingleton = () => {
-  // Priority order for database connection strings
+  // Use the pooled URL from Vercel/Neon integration with fallbacks
   const url = process.env.POSTGRES_PRISMA_URL || process.env.DATABASE_URL || process.env.POSTGRES_URL;
   
-  if (process.env.NODE_ENV === "production") {
-    if (!url) {
-      console.error("PRISMA ERROR: No connection URL found in [POSTGRES_PRISMA_URL, DATABASE_URL, POSTGRES_URL]");
-    } else {
-      console.log("Prisma Client initialized with connection URL from environment");
-    }
+  if (process.env.NODE_ENV === "production" && !url) {
+    console.error("PRISMA ERROR: No connection URL found in production env.");
   }
   
-  return new PrismaClient({
-    // @ts-ignore - Prisma 7 expects datasourceUrl for direct connection overrides
-    datasourceUrl: url || undefined,
+  const config: any = {
     log: process.env.NODE_ENV === "development" ? ["query", "error", "warn"] : ["error"],
-  });
+  };
+
+  // Only assign datasourceUrl if we have a valid string. 
+  // In Prisma 7, passing undefined/null/empty can cause an initialization crash.
+  if (url) {
+    config.datasourceUrl = url;
+  }
+  
+  return new PrismaClient(config);
 };
 
 type PrismaClientSingleton = ReturnType<typeof prismaClientSingleton>;
@@ -26,7 +28,7 @@ const globalForPrisma = globalThis as unknown as {
 };
 
 const getPrisma = (): PrismaClientSingleton => {
-  // Prevent Prisma initialization during build phase
+  // Prevent initialization during the build phase in Next.js 15+
   if (process.env.NEXT_PHASE === "phase-production-build") {
     return {} as any;
   }

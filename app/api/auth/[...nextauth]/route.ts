@@ -1,23 +1,30 @@
 import NextAuth from "next-auth";
 import { authOptions } from "@/lib/auth";
 
-export const dynamic = "force-dynamic";
+// Direct initialization for standard NextAuth App Router behavior
+const nextAuthHandler = NextAuth(authOptions);
 
+// Wrapper for diagnostic logging in production
 const handler = async (req: any, res: any) => {
   try {
-    return await NextAuth(req, res, authOptions);
+    return await nextAuthHandler(req, res);
   } catch (error: any) {
-    console.error("NextAuth Handler Error:", error);
-    // Return a 500 but with more details in the body if possible
-    return new Response(JSON.stringify({ 
-      error: "Authentication Handler Crash", 
-      message: error.message,
-      env: {
+    console.error("FATAL NextAuth Error:", error);
+    
+    // Return a diagnostic response if it crashes during initialization
+    return new Response(JSON.stringify({
+      error: "NextAuth Handler Crash",
+      details: error.message,
+      diagnostics: {
         hasPrismaUrl: !!process.env.POSTGRES_PRISMA_URL,
-        hasDatabaseUrl: !!process.env.DATABASE_URL,
+        hasDbUrl: !!process.env.DATABASE_URL,
         hasNextAuthSecret: !!process.env.NEXTAUTH_SECRET,
+        hasNextAuthUrl: !!process.env.NEXTAUTH_URL,
       }
-    }), { status: 500, headers: { "Content-Type": "application/json" } });
+    }), { 
+      status: 500, 
+      headers: { "Content-Type": "application/json" } 
+    });
   }
 };
 

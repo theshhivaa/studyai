@@ -1,9 +1,9 @@
 "use client";
 
 import { useState, useMemo } from "react";
-import { X, Plus, ChevronDown, ChevronRight, Download, Smartphone } from "lucide-react";
+import { X, Plus, ChevronDown, ChevronRight, Download, Smartphone, GraduationCap } from "lucide-react";
 import Link from "next/link";
-import { bcaSyllabus } from "@/lib/data/syllabus";
+import { bcaSyllabus, foodTechSyllabus } from "@/lib/data/syllabus";
 import ScoobyyAvatar from "@/components/ScoobyyAvatar";
 
 interface SidebarProps {
@@ -12,12 +12,24 @@ interface SidebarProps {
   activeTopic: string;
   onTopicClick: (topic: string, subject: string) => void;
   onNewChat: () => void;
+  activeCourse: "BCA" | "FoodTech";
+  setActiveCourse: (course: "BCA" | "FoodTech") => void;
 }
 
-export default function Sidebar({ isOpen, onClose, activeTopic, onTopicClick, onNewChat }: SidebarProps) {
+export default function Sidebar({ 
+  isOpen, 
+  onClose, 
+  activeTopic, 
+  onTopicClick, 
+  onNewChat,
+  activeCourse,
+  setActiveCourse
+}: SidebarProps) {
   const [openSemester, setOpenSemester] = useState<number | null>(null);
   const [openSubject, setOpenSubject] = useState<string | null>(null);
   const [openModule, setOpenModule] = useState<string | null>(null);
+
+  const currentSyllabus = activeCourse === "BCA" ? bcaSyllabus : foodTechSyllabus;
 
   const handleSubjectClick = (subject: any) => {
     if (subject.modules && subject.modules.length > 0) {
@@ -54,7 +66,7 @@ export default function Sidebar({ isOpen, onClose, activeTopic, onTopicClick, on
         </div>
 
         {/* NEW CHAT BUTTON */}
-        <div className="px-4 mb-6">
+        <div className="px-4 mb-4">
           <button 
             onClick={onNewChat}
             className="w-full bg-primary hover:bg-secondary text-black font-bold py-3 rounded-xl flex items-center justify-center gap-2 transition-all active:scale-[0.98]"
@@ -64,9 +76,38 @@ export default function Sidebar({ isOpen, onClose, activeTopic, onTopicClick, on
           </button>
         </div>
 
+        {/* COURSE SWITCHER */}
+        <div className="px-4 mb-4">
+          <div className="flex p-1 bg-white/5 rounded-xl border border-white/5 overflow-hidden">
+            {(["BCA", "FoodTech"] as const).map((course) => (
+              <button
+                key={course}
+                onClick={(e) => {
+                  e.stopPropagation();
+                  setActiveCourse(course);
+                  setOpenSemester(null);
+                }}
+                className={`flex-1 py-2 text-[10px] font-bold rounded-lg transition-all duration-300 ${
+                  activeCourse === course 
+                    ? "bg-primary text-black shadow-lg shadow-primary/20" 
+                    : "text-white/40 hover:text-white hover:bg-white/5"
+                }`}
+              >
+                {course === "FoodTech" ? "Food Tech" : "BCA"}
+              </button>
+            ))}
+          </div>
+        </div>
+
         {/* SYLLABUS LIST */}
         <div className="flex-1 overflow-y-auto px-2 custom-scrollbar pb-10">
-          {bcaSyllabus.map((sem) => (
+          <div className="px-3 mb-2">
+            <h3 className="text-[10px] font-bold text-white/30 uppercase tracking-[0.2em] flex items-center gap-2">
+              <GraduationCap size={12} />
+              {activeCourse === "BCA" ? "BCA Syllabus" : "Food Tech Syllabus"}
+            </h3>
+          </div>
+          {currentSyllabus.map((sem) => (
             <div key={sem.number} className="mb-4">
               <button 
                 onClick={() => setOpenSemester(openSemester === sem.number ? null : sem.number)}

@@ -1161,3 +1161,132 @@ export const bcaSyllabus: Semester[] = [
     ],
   },
 ];
+
+export const foodTechSyllabus: Semester[] = [
+  {
+    number: 1,
+    subjects: [
+      {
+        id: "ft_s1_fft",
+        name: "Fundamentals of Food Technology",
+        topics: ["Food Science", "Nutrients", "Probiotics", "Food Groups", "Preservation", "Safety", "FSSAI"],
+        modules: [
+          {
+            name: "Module 1: Introduction to Food Science and Technology",
+            topics: [
+              "Definition - Food, Importance and scope of Food Science and Food Technology",
+              "Basic Nutrients – Functions and sources",
+              "Prebiotic, Probiotic",
+              "Nutraceuticals and Phytonutrients",
+              "Organic foods, GM foods"
+            ]
+          },
+          {
+            name: "Module 2: Food Groups",
+            topics: [
+              "Pulses & Legumes – Types, Nutritive value",
+              "Nuts & Oilseeds - Types and Nutritive value",
+              "Fruits, Vegetables and - Classification and composition",
+              "Wheat and Rice - Structure and composition",
+              "Meat, Fish - composition and Nutritive value",
+              "Egg - Structure and Nutritive Value",
+              "Milk - Composition and Nutritive Value",
+              "Spices and Plantation products - Classification and importance"
+            ]
+          },
+          {
+            name: "Module 3: Food Processing and Safety",
+            topics: [
+              "Food Preservation - Principles and Types",
+              "Food Packaging - Importance and Common materials",
+              "Food Additives",
+              "Major Sectors of Food Processing Industry, National and International Research Institutes",
+              "Food Safety - Need for Food Safety. Hazards in Foods - Physical, Chemical and Biological",
+              "FSSAI"
+            ]
+          },
+          {
+            name: "Module 4: Sensory Evaluation",
+            topics: [
+              "Sensory assessment - Appearance of food - visual perception, colour of foods, smell, flavour and Taste",
+              "Types of panels - Laboratory Set-up and Equipments",
+              "Types of Sensory Evaluation and Importance"
+            ]
+          },
+          {
+            name: "Module 5: Practical (Lab)",
+            topics: [
+              "Standardization of NaOH and HCl",
+              "Determination of Moisture using Hot air oven/Distillation/Infrared",
+              "Determination of Acidity & pH",
+              "Determination of TSS",
+              "Qualitative test for carbohydrates – Molisch's test, Benedict's test, Iodine test",
+              "Anthrone test, Selivanoff's test",
+              "Qualitative Test of Proteins",
+              "Industrial Visit: Food Processing Unit"
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    number: 2,
+    subjects: [
+      {
+        id: "ft_s2_fm1",
+        name: "Food Microbiology - 1",
+        topics: ["Microbiology History", "Bacteria", "Fungi", "Yeast", "Virus", "Cultivation", "Growth Factors"],
+        modules: [
+          {
+            name: "Module I: Introduction to Microbiology",
+            topics: [
+              "History and Development of Microbiology - Germ theory of disease, Koch’s postulates",
+              "Theory of spontaneous generation and biogenesis",
+              "Microscopy – History, Parts of microscope, properties",
+              "Types of microscopes - Light microscope (Bright field, Dark field)",
+              "Fluorescence and Electron microscope"
+            ]
+          },
+          {
+            name: "Module II: Characteristics of Microorganisms in Food",
+            topics: [
+              "Bacteria - size, shape and arrangement",
+              "Bacteria - Structure, Morphology",
+              "Bacteria - Reproduction - Binary fission, Transformation, Transduction and conjugation"
+            ]
+          },
+          {
+            name: "Module III: Other Microorganisms",
+            topics: [
+              "Fungi – Morphology, Classification, Reproduction – Sexual and Asexual",
+              "Yeast - Structure, Morphology, Reproduction – Sexual and Asexual",
+              "Virus - Classification, Composition, Morphology",
+              "Replication of virus - lysogenic & lytic cycle",
+              "Algae: Types"
+            ]
+          },
+          {
+            name: "Module IV: Cultivation of Micro-organisms",
+            topics: [
+              "Methods of isolation and cultivation, Serial dilution method",
+              "Pure culture technique - streak plate, pour plate, spread plate",
+              "Enumeration of Microorganisms qualitative and Quantitative",
+              "Cultural Media – classification, Selective, Differential, Enrichment Media",
+              "Staining techniques – simple, differential staining (Gram staining, Acid-fast)"
+            ]
+          },
+          {
+            name: "Module V: Microbial Growth in Food",
+            topics: [
+              "Factors affecting the growth of microorganisms in food (intrinsic, extrinsic)",
+              "Nutritional requirement of microorganisms",
+              "Bacterial growth curve and phases",
+              "Microbial growth in food environmental conditions"
+            ]
+          }
+        ]
+      }
+    ]
+  }
+];

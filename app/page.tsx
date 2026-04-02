@@ -3,10 +3,13 @@
 import { useState, useEffect } from "react";
 import Sidebar from "@/components/chat/Sidebar";
 import ChatArea from "@/components/chat/ChatArea";
-import { bcaSyllabus } from "@/lib/data/syllabus";
+import { bcaSyllabus, foodTechSyllabus } from "@/lib/data/syllabus";
+
+type Course = "BCA" | "FoodTech";
 
 export default function Home() {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+  const [activeCourse, setActiveCourse] = useState<Course>("BCA");
   const [activeTopic, setActiveTopic] = useState("");
   const [messages, setMessages] = useState<any[]>([]);
   const [isLoading, setIsLoading] = useState(false);
@@ -102,7 +105,10 @@ export default function Home() {
     // Find context from syllabus
     let context = "";
     let subtopics = "";
-    for (const sem of bcaSyllabus) {
+    const currentSyllabus = activeCourse === "BCA" ? bcaSyllabus : foodTechSyllabus;
+    const courseName = activeCourse === "BCA" ? "BCA" : "Food Technology";
+
+    for (const sem of currentSyllabus) {
       const subject = sem.subjects.find(s => s.name === subjectName);
       if (subject) {
         const module = subject.modules?.find(m => m.topics.includes(topicName) || m.name === topicName);
@@ -118,7 +124,7 @@ export default function Home() {
       }
     }
 
-    const initialPrompt = `${context ? context + " " : ""}Explain ${topicName} from my BCA syllabus.${subtopics} Style: Standard.`;
+    const initialPrompt = `${context ? context + " " : ""}Explain ${topicName} from my ${courseName} syllabus.${subtopics} Style: Standard.`;
     
     // Trigger the AI response with empty history
     handleSendMessage(initialPrompt, []);
@@ -144,6 +150,8 @@ export default function Home() {
         activeTopic={activeTopic}
         onTopicClick={handleTopicClick}
         onNewChat={handleNewChat}
+        activeCourse={activeCourse}
+        setActiveCourse={setActiveCourse}
       />
       <ChatArea 
         onToggleSidebar={() => setIsSidebarOpen(!isSidebarOpen)}

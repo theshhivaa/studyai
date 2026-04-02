@@ -33,7 +33,7 @@ export const authOptions: NextAuthOptions = {
     async session({ session, token }) {
       if (session.user) {
         // @ts-ignore
-        session.user.id = token.id;
+        session.user.id = token.id || token.sub;
         // @ts-ignore
         session.user.hasSetName = token.hasSetName;
       }

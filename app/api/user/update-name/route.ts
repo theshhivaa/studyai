@@ -17,10 +17,15 @@ export async function POST(req: Request) {
       return new NextResponse("Name is too short", { status: 400 });
     }
 
+    // Identify the user by ID (preferred) or Email (fallback for continuity)
+    const where = session.user.id 
+      ? { id: session.user.id } 
+      : { email: session.user.email as string };
+
     // Update the user's name and set hasSetName flag to true
     // @ts-ignore
     const updatedUser = await prisma.user.update({
-      where: { id: session.user.id },
+      where,
       data: {
         name: name.trim(),
         hasSetName: true,

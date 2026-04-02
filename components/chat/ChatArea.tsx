@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useRef, useEffect } from "react";
+import { useSession } from "next-auth/react";
 import { Send, Menu, Sparkles, FileText, Layout, Lightbulb, HelpCircle, Copy, Check, Mic, Paperclip, X } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import MessageBubble from "./MessageBubble";
@@ -34,6 +35,7 @@ export default function ChatArea({
   isLoading, 
   setIsLoading 
 }: ChatAreaProps) {
+  const { data: session } = useSession();
   const { setAvatarState } = useAvatar();
   const { incrementGuestMessageCount } = useGuest();
   const [input, setInput] = useState("");
@@ -193,7 +195,9 @@ export default function ChatArea({
 
         <div className="flex items-center gap-2">
           <div className="flex flex-col items-end hidden sm:flex">
-            <span className="text-[11px] font-bold text-white">Scooby</span>
+            <span className="text-[11px] font-bold text-white">
+              {session?.user?.name || "Guest"}
+            </span>
             <div className="flex items-center gap-1.5">
               <span className="w-1.5 h-1.5 bg-green-500 rounded-full animate-pulse" />
               <span className="text-[9px] text-text-muted uppercase tracking-wider">Online</span>

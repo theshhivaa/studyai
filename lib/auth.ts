@@ -15,10 +15,27 @@ export const authOptions: NextAuthOptions = {
     strategy: "jwt",
   },
   callbacks: {
+    async jwt({ token, user, trigger, session }) {
+      if (user) {
+        token.id = user.id;
+        // @ts-ignore
+        token.hasSetName = user.hasSetName;
+      }
+      
+      // Allow manual session updates (when user sets their name)
+      if (trigger === "update" && session?.name) {
+        token.name = session.name;
+        token.hasSetName = true;
+      }
+      
+      return token;
+    },
     async session({ session, token }) {
       if (session.user) {
         // @ts-ignore
-        session.user.id = token.sub;
+        session.user.id = token.id;
+        // @ts-ignore
+        session.user.hasSetName = token.hasSetName;
       }
       return session;
     },

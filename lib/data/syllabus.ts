@@ -1288,5 +1288,126 @@ export const foodTechSyllabus: Semester[] = [
         ]
       }
     ]
+  },
+  {
+    number: 3,
+    subjects: [
+      {
+        id: "ft_s3_ns",
+        name: "Nutrition Science",
+        topics: ["Health & Nutrition", "Energy", "Carbohydrates", "Proteins", "Lipids", "Vitamins", "Minerals"],
+        modules: [
+          {
+            name: "Module I: Health, Nutrition & Food",
+            topics: [
+              "Physical, mental, social and spiritual health",
+              "Determinants & indicators of health",
+              "Nutrition & malnutrition, importance of ideal nutrition",
+              "Balanced diet, BMI, Food guide, Pyramid and RDA",
+              "Menu Planning, Significance of Menu Planning, Menu planning for family, Factors influencing meal planning",
+              "Nutrition for the normal life cycle, Nutrition during Pregnancy and Lactation",
+              "Nutrition for Fitness and Sports",
+              "Nutrigenetics and Genomics",
+              "HFSS foods",
+              "DASH diet"
+            ]
+          },
+          {
+            name: "Module II: Energy",
+            topics: [
+              "Definition, Calorie & Joule",
+              "Measurement of Calorific values of Food",
+              "Basal metabolism-BMR",
+              "Energy requirements & expenditure"
+            ]
+          },
+          {
+            name: "Module III: Carbohydrates, Protein & Lipids",
+            topics: [
+              "Sources",
+              "Nutritional classification",
+              "Digestion, Absorption and Transportation",
+              "Health disorders due to its imbalance in the body",
+              "Potential health benefits"
+            ]
+          },
+          {
+            name: "Module IV: Vitamins, Minerals, & Water",
+            topics: [
+              "Nutritional classification and Sources",
+              "Digestion, Absorption and Transportation",
+              "Health benefits and disorders due to its imbalance in the body"
+            ]
+          },
+          {
+            name: "Module V: OPEN ENDED: DIET THERAPY",
+            topics: [
+              "Dietary management and therapeutic adaptations",
+              "Role of dietitian in health and disease",
+              "Patient education and counseling basics"
+            ]
+          }
+        ]
+      },
+      {
+        id: "ft_s3_fc",
+        name: "Food Chemistry",
+        topics: ["Carbohydrates", "Proteins", "Lipids", "Water", "Pigments", "Enzymes", "Colloids"],
+        modules: [
+          {
+            name: "Module I: Classification, structure, sources & properties of carbohydrates, proteins, lipids and water",
+            topics: [
+              "Carbohydrates: Monosaccharides - Glucose, fructose and galactose structure and properties",
+              "Oligosaccharides - Maltose, lactose and sucrose, crystallization, inversion, hydrolysis",
+              "Reducing and non-reducing sugars, Caramelisation and Maillard reaction",
+              "Polysaccharides - Starch structure of amylose and amylopectin, Gelatinisation and retrogradation",
+              "Cellulose, hemicellulose, pectic substances, gums and dietary fibre",
+              "Proteins: Structure and classification of amino acids and proteins",
+              "Important food proteins and physiochemical properties - denaturation",
+              "Protein Determination methods",
+              "Lipids: Chemistry, Classification and Properties of Lipids and Fatty acids",
+              "Rancidity, auto oxidation and hydrolysis, Anti-oxidants",
+              "Water: Structure of water and Ice, physical and chemical properties",
+              "Free and bound water, moisture determination, Water activity"
+            ]
+          },
+          {
+            name: "Module II: Pigments",
+            topics: [
+              "Structure, sources and properties of pigments: Chlorophyll and Carotenoids",
+              "Flavonoids and anthocyanins, Anthoxanthins and myoglobin",
+              "Methods to prevent discoloration of natural pigments"
+            ]
+          },
+          {
+            name: "Module III: Enzymes",
+            topics: [
+              "Introduction, definition, occurrence, classification and properties",
+              "Factors effecting enzyme activity",
+              "Enzymes in food and its applications in food industry"
+            ]
+          },
+          {
+            name: "Module IV: Colloids",
+            topics: [
+              "Chemistry of colloids, properties of solutions, sols, suspensions and emulsions",
+              "Types of emulsions and Emulsifying agents, Food colloids"
+            ]
+          },
+          {
+            name: "Module V: PRATICALS",
+            topics: [
+              "Standardization of NaOH and HCl",
+              "Determination of moisture, acidity and pH",
+              "Qualitative test for carbohydrates and proteins",
+              "Qualitative analysis of protein by colorimetry",
+              "Analysis of lipids: Iodine value, Free fatty acids, Peroxide value, Saponification value",
+              "Analysis of water: Hardness, Alkalinity, Acidity, Chloride",
+              "Quantitative methods: Protein, Carbohydrates, Fat, Ash, Fibre"
+            ]
+          }
+        ]
+      }
+    ]
   }
 ];

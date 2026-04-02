@@ -25,11 +25,18 @@ When providing notes or explanations for syllabus topics, adapt your depth based
    - Multiple examples (code or scientific processes) and clear mermaid diagrams.
    - Potential Exam Questions (2-3) at the end.
 
+VISION & FILE ANALYSIS CAPABILITIES:
+- You have VISION capabilities. When a user uploads a photo of notes, diagrams, or a question paper, you can see and analyze them.
+- OCR (Optical Character Recognition): You can accurately convert handwritten or printed text in photos into digital text.
+- Image Analysis: You can explain diagrams, solve math/coding problems from photos, and answer questions based on the content of an image.
+- File Discussion: You can read text files and provide summaries, explanations, or answer questions about their content.
+
 Response Guidelines:
 1. FOR GENERAL QUESTIONS (e.g., "Hi", "What can you do?", "Who are you?"): Be brief and friendly. ALWAYS mention that you are an expert in both BCA and Food Technology.
 2. FOR ACADEMIC/STUDY QUESTIONS: Follow the STUDY AI ACADEMIC ENGINE rules. Use markdown, bold headers, and structured lists.
-3. FOR CONTEXT SWITCHING: If a user is in the BCA section but asks a Food Tech question (or vice-versa), answer it with full expertise in that field. You are a master of both.
-4. FOR CONTEXT: Always acknowledge the Semester, Subject, and Module if provided.
+3. FOR IMAGE/PHOTO REQUESTS: If a user asks to "Convert to text" or "Explain this note," use your vision to provide a high-quality transcription or explanation.
+4. FOR CONTEXT SWITCHING: If a user is in the BCA section but asks a Food Tech question (or vice-versa), answer it with full expertise in that field. You are a master of both.
+5. FOR CONTEXT: Always acknowledge the Semester, Subject, and Module if provided.
 Always maintain the Scooby persona. Use emojis sparingly (e.g., 📝, 💡, 🐾).`;
 
 export async function POST(request: Request) {
@@ -51,6 +58,18 @@ export async function POST(request: Request) {
       ? "The user is currently browsing the Food Technology section. Be ready to provide expertise in Food Science, but remain competent in BCA if asked."
       : "The user is currently browsing the BCA section. Be ready to provide expertise in Computer Science, but remain competent in Food Tech if asked.";
 
+    // Handle File Content (Non-Image)
+    let processedMessage = message;
+    if (fileData && fileData.mimeType === "text/plain") {
+      try {
+        const base64Content = fileData.data.split(",")[1];
+        const textContent = Buffer.from(base64Content, "base64").toString("utf-8");
+        processedMessage = `[Attached Text File: ${textContent}]\n\n${message}`;
+      } catch (err) {
+        console.error("Failed to decode text file:", err);
+      }
+    }
+
     // Use vision model if image is provided
     const isImage = fileData && fileData.mimeType.startsWith("image/");
     const model = isImage ? "llama-3.2-11b-vision-preview" : "llama-3.3-70b-versatile";
@@ -71,12 +90,12 @@ export async function POST(request: Request) {
       messages.push({
         role: "user",
         content: [
-          { type: "text", text: message },
+          { type: "text", text: processedMessage },
           { type: "image_url", image_url: { url: fileData.data } }
         ]
       });
     } else {
-      messages.push({ role: "user", content: message });
+      messages.push({ role: "user", content: processedMessage });
     }
 
     const stream = await groq.chat.completions.create({

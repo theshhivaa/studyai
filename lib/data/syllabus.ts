@@ -1748,5 +1748,173 @@ export const foodTechSyllabus: Semester[] = [
         ]
       }
     ]
+  },
+  {
+    number: 6,
+    subjects: [
+      {
+        id: "ft_s6_dt",
+        name: "Dairy Technology",
+        topics: ["Milk Composition", "Processing", "Dairy Products", "Plant Maintenance", "Sanitation"],
+        modules: [
+          {
+            name: "Module I: Introduction",
+            topics: [
+              "Composition of Milk (Sources, Factors affecting composition)",
+              "Physical/Chemical properties: Flavor, Color, Acidity, Viscosity",
+              "Specific Gravity, Freezing/Boiling points, Effect of heat/enzymes",
+              "Types of Milk: Buffalo, Cow, Goat, Sheep",
+              "Market Milk: Mixed, Standardized, Full Cream, Recombined, Toned, Skimmed"
+            ]
+          },
+          {
+            name: "Module II: Processing and Distribution",
+            topics: [
+              "Milk Processing: Pasteurization, Homogenization, Sterilization",
+              "Distribution systems and logistics",
+              "Storage of liquid milk and quality retention"
+            ]
+          },
+          {
+            name: "Module III: Dairy Products",
+            topics: [
+              "Fermented: Dahi/Curd, Yoghurt, Cheese, Chakka, Shrikhand",
+              "Non-fermented: Cream, Malai, Chana, Paneer, Butter, Ghee",
+              "Desserts: Ice Cream, Frozen Desserts, Kulfi, Milk Lolly",
+              "Condensed/Dried products: Evaporated milk, Milk powder, Infant milk",
+              "Dairy By-products: Whey products and Edible casein"
+            ]
+          },
+          {
+            name: "Module IV: Dairy Plant - Maintenance and Sanitation",
+            topics: [
+              "Cleaning and Sanitation: CIP (Cleaning In Place) systems",
+              "Plant Maintenance and preventive measures",
+              "Animal and Pest Control in dairy units",
+              "Drainage and Waste Management in food plants"
+            ]
+          },
+          {
+            name: "Module V: Practicals",
+            topics: [
+              "Chemical analysis: Acidity, Fat content, Total solids, SNF",
+              "Physical tests: Specific gravity, Total ash",
+              "Butter/Ghee: Acidity, Moisture, Salt, FFA content",
+              "Product preparation: Khoa, Peda",
+              "Quality/Safety: Adulteration tests in milk"
+            ]
+          }
+        ]
+      },
+      {
+        id: "ft_s6_taf",
+        name: "Technology of Animal Food",
+        topics: ["Meat Slaughter", "Preservation", "Egg Technology", "Fish Products"],
+        modules: [
+          {
+            name: "Module I: Slaughter and Inspection of Meat",
+            topics: [
+              "Sources and Status of meat/poultry industry in India",
+              "Pre-slaughter and slaughtering operations (stunning types)",
+              "Abattoir design, layout, and humane methods",
+              "Meat Inspection: Ante-mortem and post-mortem changes",
+              "Meat quality: Structure, tenderness, emulsions, and aging",
+              "Safety standards: HACCP/ISO/FSSAI/Halal/Kosher"
+            ]
+          },
+          {
+            name: "Module II: Preservation and Products",
+            topics: [
+              "Meat Preservation: Chilling, Freezing, Smoking, Dehydration, Radiation",
+              "Cured Meat: ingredients, methods, and quality (Ham, Bacon)",
+              "Sausage processing: classification and casings",
+              "Meat By-products: rendering, feeds, hides, and horns",
+              "Meat speciation using DNA based molecular techniques"
+            ]
+          },
+          {
+            name: "Module III: Egg and Preservation Methods",
+            topics: [
+              "Structure, Composition, and Quality characteristics (Grading)",
+              "Storage changes and factors affecting egg quality",
+              "Effect of cooking and factors affecting coagulation",
+              "Preservation: Refrigeration, Freezing, Thermal, Dehydration, Coating",
+              "Industrial use of eggs in food sectors"
+            ]
+          },
+          {
+            name: "Module IV: Fish and Fish Products",
+            topics: [
+              "Fish: Composition, Nutritive value, and Spoilage indices",
+              "Preservation: Cold storage, Freezing, Pickling, Canning, Drying",
+              "Fish Products: Protein concentrate, Oils (Body/Liver), Meal, Ensilage",
+              "Advanced products: Chitosan, Pearl essence, Glue, Gelatine"
+            ]
+          },
+          {
+            name: "Module V: Practicals",
+            topics: [
+              "Slaughter operations and dressing of meat/poultry birds",
+              "Meat cutting, handling, pickling, freezing, and curing",
+              "Evaluation of egg quality, grading, and shell preservation",
+              "Value-added products: Poultry meat, Egg, Meat & Fish",
+              "Spoilage indices and evaluation of fish quality",
+              "Industrial visit to Meat/Fish/Egg processing units"
+            ]
+          }
+        ]
+      },
+      {
+        id: "ft_s6_fspl",
+        name: "Food Safety and Food Plant Layout",
+        topics: ["Safety Principles", "Pathogens", "FSMS", "Plant Design"],
+        modules: [
+          {
+            name: "Module I: Introduction to Food Safety",
+            topics: [
+              "Definition and Importance of food safety principles",
+              "Regulatory framework: Role of government and agencies",
+              "Personal Hygiene: Health status, cleanliness, behavior",
+              "Visitor control and workplace grooming"
+            ]
+          },
+          {
+            name: "Module II: Pathogens, Allergens, and Intolerances",
+            topics: [
+              "Food spoilage and borne pathogens (microbial growth factors)",
+              "Sources of contamination and emerging/zoonotic pathogens",
+              "Food Allergens: Common types and management in industry",
+              "Food Intolerances: Lactose and Gluten"
+            ]
+          },
+          {
+            name: "Module III: Food Safety Management System (FSMS)",
+            topics: [
+              "ISO 22000 and FSMS standards",
+              "HACCP: Prerequisite and Implementation",
+              "Documentation and record keeping in safety systems",
+              "Training programs for staff in food industry"
+            ]
+          },
+          {
+            name: "Module IV: Plant – Design, Facilities, and Layout",
+            topics: [
+              "Location and Surroundings for food plants",
+              "Building design, construction, and layout principles",
+              "Equipment design, installation, and material flow",
+              "Facilities and Utilities (drainage, ventilation, etc.)"
+            ]
+          },
+          {
+            name: "Module V: Practical/Application Tasks",
+            topics: [
+              "Design building plan (Top view) for small food processing unit",
+              "Process Layout for machineries (Food sectors)",
+              "Flow chart design for material management"
+            ]
+          }
+        ]
+      }
+    ]
   }
 ];

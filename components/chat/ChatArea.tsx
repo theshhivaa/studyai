@@ -6,6 +6,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import MessageBubble from "./MessageBubble";
 import ScoobyyAvatar from "@/components/ScoobyyAvatar";
 import { useAvatar } from "@/components/context/AvatarContext";
+import { useGuest } from "../context/GuestContext";
 
 interface Message {
   role: "user" | "assistant";
@@ -34,6 +35,7 @@ export default function ChatArea({
   setIsLoading 
 }: ChatAreaProps) {
   const { setAvatarState } = useAvatar();
+  const { incrementGuestMessageCount } = useGuest();
   const [input, setInput] = useState("");
   const [isRecording, setIsRecording] = useState(false);
   const [selectedFile, setSelectedFile] = useState<{ 
@@ -151,6 +153,9 @@ export default function ChatArea({
     
     // Clear file preview immediately
     removeFile();
+    
+    // Increment guest message count (triggers popup every 10 messages)
+    incrementGuestMessageCount();
     
     await handleSendMessage(messageText, undefined, fileData);
     setAvatarState("thinking");

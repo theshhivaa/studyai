@@ -11,11 +11,11 @@ export default function Footer() {
             <Link href="/" className="flex items-center space-x-2 group mb-4">
               <ScoobyyAvatar size={24} variant="black" />
               <span className="text-xl font-bold font-orbitron tracking-wider bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">
-                Scooby BCA
+                Scooby AI
               </span>
             </Link>
             <p className="text-muted text-sm leading-relaxed">
-              Your AI-powered study companion for the Bachelor of Computer Applications. Powered by Scooby
+              Your AI-powered study companion for BCA and Food Technology. Powered by Scooby
             </p>
           </div>
 
@@ -63,10 +63,10 @@ export default function Footer() {
         
         <div className="mt-12 pt-8 border-t border-white/5 flex flex-col md:flex-row justify-between items-center text-xs text-muted">
           <div className="md:w-1/3 text-center md:text-left mb-4 md:mb-0">
-            <p>© {new Date().getFullYear()} Scooby BCA. All rights reserved.</p>
+            <p>© {new Date().getFullYear()} Scooby AI. All rights reserved.</p>
           </div>
           <div className="md:w-1/3 text-center">
-            <p>Made with ❤️ for BCA Students</p>
+            <p>Made with ❤️ for Students</p>
             <p className="font-bold tracking-widest mt-1 text-primary/80">DEVELOPED BY SHIVA PRASAD S</p>
           </div>
           <div className="hidden md:block md:w-1/3"></div>

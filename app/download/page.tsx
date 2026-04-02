@@ -98,7 +98,7 @@ export default function DownloadPage() {
           <Link href="/" className="flex items-center gap-2">
             <ScoobyyAvatar size={28} variant="black" />
             <span className="font-orbitron font-bold text-lg bg-gradient-to-r from-yellow-400 to-amber-500 bg-clip-text text-transparent">
-              Scooby BCA
+              Scooby AI
             </span>
           </Link>
           <div className="w-24" />
@@ -130,7 +130,7 @@ export default function DownloadPage() {
           </h1>
 
           <p className="text-lg text-gray-400 max-w-xl mx-auto mb-10 leading-relaxed">
-            Your BCA study companion, now in your pocket. Get AI-powered answers,
+            Your study companion for BCA and Food Technology, now in your pocket. Get AI-powered answers,
             browse your full syllabus, and ace every exam — all from your Android device.
           </p>
 
@@ -261,7 +261,7 @@ export default function DownloadPage() {
               Ready to Study Smarter?
             </h2>
             <p className="text-gray-400 mb-8 leading-relaxed">
-              Join hundreds of BCA students already using Scooby AI to crack their exams.
+              Join students already using Scooby AI to crack their exams.
             </p>
             <button
               id="download-apk-btn-bottom"
@@ -283,7 +283,7 @@ export default function DownloadPage() {
       {/* Footer */}
       <footer className="relative z-10 border-t border-white/5 py-8 px-4 text-center text-sm text-gray-600">
         <p>
-          © {new Date().getFullYear()} Scooby BCA · Made with ❤️ by{" "}
+          © {new Date().getFullYear()} Scooby AI · Made with ❤️ by{" "}
           <span className="text-yellow-500/70">Shiva Prasad S</span>
         </p>
       </footer>

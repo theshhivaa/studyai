@@ -2,6 +2,7 @@ export async function getScoobyResponse(
   message: string, 
   history: { role: string; parts: string }[] = [],
   fileData?: { mimeType: string; data: string },
+  activeCourse?: string,
   onChunk?: (chunk: string) => void
 ) {
   try {
@@ -10,7 +11,7 @@ export async function getScoobyResponse(
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({ message, history, fileData }),
+      body: JSON.stringify({ message, history, fileData, activeCourse }),
     });
 
     if (!response.ok) {

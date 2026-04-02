@@ -36,7 +36,7 @@ export default function Navbar() {
               <ScoobyyAvatar size={32} variant="black" />
             </div>
             <span className="text-xl font-bold font-orbitron tracking-wider bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">
-              Scooby BCA
+              Scooby AI
             </span>
           </Link>
 

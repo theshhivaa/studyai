@@ -61,7 +61,8 @@ export default function Home() {
         text,
         history,
         fileData,
-        (chunk) => {
+        activeCourse,
+        (chunk: string) => {
           setMessages(prev => {
             const lastMessage = prev[prev.length - 1];
             if (lastMessage && lastMessage.role === "assistant") {

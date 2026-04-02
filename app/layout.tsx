@@ -15,16 +15,16 @@ const orbitron = Orbitron({
 });
 
 export const metadata: Metadata = {
-  title: 'Scooby BCA | AI Assistant',
-  description: 'Your intelligent study companion for Bachelor of Computer Applications',
+  title: 'Scooby AI | AI Study Assistant',
+  description: 'Your intelligent study companion for BCA and Food Technology',
   icons: {
     icon: '/favicon.png',
     apple: '/favicon.png',
     shortcut: '/favicon.png',
   },
   openGraph: {
-    title: 'Scooby BCA | AI Assistant',
-    description: 'Your intelligent study companion for Bachelor of Computer Applications',
+    title: 'Scooby AI | AI Study Assistant',
+    description: 'Your intelligent study companion for BCA and Food Technology',
     url: 'https://bcascoobyai.vercel.app',
     siteName: 'StudyWithScooby',
     images: [
@@ -32,15 +32,15 @@ export const metadata: Metadata = {
         url: '/og-image.png',
         width: 1200,
         height: 630,
-        alt: 'Scooby BCA AI Assistant',
+        alt: 'Scooby AI Assistant',
       },
     ],
     type: 'website',
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Scooby BCA | AI Assistant',
-    description: 'Your intelligent study companion for BCA',
+    title: 'Scooby AI | AI Assistant',
+    description: 'Your intelligent study companion for BCA and Food Technology',
     images: ['/og-image.png'],
   },
 }

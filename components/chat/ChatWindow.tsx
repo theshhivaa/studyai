@@ -15,10 +15,10 @@ interface Message {
   content: string;
 }
 
-export default function ChatWindow({ initialMessage = "" }: { initialMessage?: string }) {
+export default function ChatWindow({ initialMessage = "", activeCourse = "BCA" }: { initialMessage?: string; activeCourse?: string }) {
   const { setAvatarState } = useAvatar();
   const [messages, setMessages] = useState<Message[]>([
-    { role: "assistant", content: "Hey! I'm Scooby Your BCA buddy. What topic are you stuck on today?" }
+    { role: "assistant", content: `Hey! I'm Scooby, your AI buddy for BCA and Food Tech. I see you're focusing on ${activeCourse === "FoodTech" ? "Food Tech" : "BCA"} right now — how can I help you today?` }
   ]);
   const [input, setInput] = useState("");
   const [isLoading, setIsLoading] = useState(false);
@@ -190,7 +190,8 @@ export default function ChatWindow({ initialMessage = "" }: { initialMessage?: s
       messageText, 
       history, 
       fileData, 
-      (chunk) => {
+      activeCourse,
+      (chunk: string) => {
         setIsLoading(false); // Stop "thinking" as soon as we start getting text
         if (chunk.length > 0) setAvatarState("idle");
         setMessages(prev => {

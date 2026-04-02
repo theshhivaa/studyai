@@ -1,9 +1,6 @@
 import { PrismaClient } from "@prisma/client";
-import { PrismaNeon } from "@prisma/adapter-neon";
-import { Pool, neonConfig } from "@neondatabase/serverless";
-import ws from "ws";
-
-neonConfig.webSocketConstructor = ws;
+import { PrismaPg } from "@prisma/adapter-pg";
+import pg from "pg";
 
 export async function GET() {
   let url = process.env.POSTGRES_PRISMA_URL || process.env.DATABASE_URL || process.env.POSTGRES_URL;
@@ -13,12 +10,8 @@ export async function GET() {
     url = `${url}${separator}sslmode=require`;
   }
 
-  const pool = new Pool({ 
-    connectionString: url,
-    ssl: true, 
-    max: 10,
-  });
-  const adapter = new PrismaNeon(pool as any);
+  const pool = new pg.Pool({ connectionString: url });
+  const adapter = new PrismaPg(pool);
   const prisma = new PrismaClient({ adapter });
 
   const diagnostics: any = {

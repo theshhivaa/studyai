@@ -1571,9 +1571,14 @@ export const foodTechSyllabus: Semester[] = [
             ]
           }
         ]
-      },
+      }
+    ]
+  },
+  {
+    number: 5,
+    subjects: [
       {
-        id: "ft_s4_fepn",
+        id: "ft_s5_fepn",
         name: "Basics of Food Engineering and Packaging Technology",
         topics: ["Physical Properties", "Heat Transfer", "Packaging Materials", "Labelling", "Trends"],
         modules: [
@@ -1624,6 +1629,120 @@ export const foodTechSyllabus: Semester[] = [
               "Shelf-life study and chemical/physical tests",
               "Tearing/Bursting/Puncture resistance demonstration",
               "New Tech: Blockchain and 3D printing in packaging"
+            ]
+          }
+        ]
+      },
+      {
+        id: "ft_s5_tfv",
+        name: "Technology of Fruits and Vegetables",
+        topics: ["Post Harvest Physiology", "Pectin", "Beverages", "Canning", "Tomato Products"],
+        modules: [
+          {
+            name: "Module I: POST HARVEST TECHNOLOGY OF FRUITS AND VEGETABLES",
+            topics: [
+              "Pre- and post-harvest physiology and maturity indices",
+              "Ripening changes (climacteric/non-climacteric) and treatments",
+              "Post-harvest handling: sorting, grading, storage, and transportation",
+              "Storage disorders: chilling injury, physiological/freezing injury",
+              "Storage practices: cold/CAS/MAS/hypobaric storage",
+              "Primary processing: peeling, slicing, blanching, wax coating"
+            ]
+          },
+          {
+            name: "Module II: PECTIN, BEVERAGES AND OTHER FRUIT PRODUCTS",
+            topics: [
+              "Frozen fruits/vegetables processing and IQF",
+              "Pectin: definition, classification, enzymes, and testing",
+              "Jam, jelly, marmalade, and candy (FSSAI specifications)",
+              "RTS, Squashes, Cordials, syrups, sherbet, and crush",
+              "Fruit juice concentrates and aroma recovery systems",
+              "Pickles and chutneys production and spoilage",
+              "Alcoholic beverages: wine, beer, arak"
+            ]
+          },
+          {
+            name: "Module III: PROCESSING AND PRESERVATION TECHNOLOGY",
+            topics: [
+              "Canning classification and brines/syrups for fruits/vegetables",
+              "Jack fruit value added products",
+              "Drying and Dehydration: sun drying, sulphuring, and inactivation",
+              "Browning: Enzymatic Browning and its prevention",
+              "Benefits of preserved Fruits and Vegetables"
+            ]
+          },
+          {
+            name: "Module IV: TOMATO, BANANA, MUSHROOM AND TUBER CROPS PRODUCTS",
+            topics: [
+              "Tomato products: juice, puree, and ketchup specifications",
+              "Banana and Mushroom nutritional significance and processing",
+              "Cassava: syrup, dextrose, and flour processing",
+              "Potato products: chips, French fries, and dehydrated products"
+            ]
+          },
+          {
+            name: "Module V: PRACTICALS",
+            topics: [
+              "Determination of TSS and acidity in fruit juice",
+              "Lye peeling and extraction of tomato pulp",
+              "Home canning, ketchup, jam, jelly, and squash preparation",
+              "Dehydration ratio and preparation of wine",
+              "Determination of SO2 and salt content in pickles",
+              "Estimation of Vitamin C"
+            ]
+          }
+        ]
+      },
+      {
+        id: "ft_s5_ed",
+        name: "Entrepreneurship Development",
+        topics: ["Enterprise Concept", "Project Management", "Government Schemes", "Business Ethics"],
+        modules: [
+          {
+            name: "Module I: Entrepreneurial Foundation",
+            topics: [
+              "Concept of entrepreneur, entrepreneurship, and enterprise",
+              "Characteristics, distinction from managers, and qualities",
+              "Agri & Food Entrepreneurship: need, scope, and innovation",
+              "Women entrepreneurship: roles, importance, and problems",
+              "Planning, budgeting, monitoring, and environmental analysis (SWOC)"
+            ]
+          },
+          {
+            name: "Module II: Project Development",
+            topics: [
+              "Generation, incubation, and commercialization of ideas",
+              "Competition management and Entrepreneurship Development Programmes",
+              "Project Life Cycle: identification, feasibility, planning, and control",
+              "Project appraisal, evaluation, and cost calculation",
+              "Break-even analysis"
+            ]
+          },
+          {
+            name: "Module III: Support Systems & MSME",
+            topics: [
+              "Government schemes and promotional institutions",
+              "MSME: classification, objectives, advantages, and disadvantages",
+              "National Institutions: DIC, KVIC, SIDBI, IDBI, NABARD, MOFPI",
+              "State Institutions: KITCO, KFC, SIDCO, KCIDC, KINFRA"
+            ]
+          },
+          {
+            name: "Module IV: Business Ethics and Marketing",
+            topics: [
+              "Business ethics, social responsibility, and venture capital",
+              "Contract farming, joint ventures, and PPP model",
+              "Food industry inputs and export characteristics",
+              "Marketing strategy: advertising, distribution, and supply chain",
+              "E-commerce, social media, and consumer behavior"
+            ]
+          },
+          {
+            name: "Module V: Training and Documentation",
+            topics: [
+              "In-Plant Training in Food Processing unit (10-15 days)",
+              "Detailed Project Report (DPR) preparation for major sectors",
+              "FSSAI Registration and licensing procedures"
             ]
           }
         ]

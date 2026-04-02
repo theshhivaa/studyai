@@ -1409,5 +1409,225 @@ export const foodTechSyllabus: Semester[] = [
         ]
       }
     ]
+  },
+  {
+    number: 4,
+    subjects: [
+      {
+        id: "ft_s4_fppt",
+        name: "Food Processing and Preservation Technology",
+        topics: ["Thermal Processing", "Low Temperature Preservation", "Fermentation", "Chemical Preservatives", "NPD"],
+        modules: [
+          {
+            name: "Module I: Thermal Processing",
+            topics: [
+              "Basic principles and methods of food preservation",
+              "Thermal processing: blanching, pasteurization, sterilization, UHT",
+              "Aseptic processing, cooking, frying, baking, grilling, smoking",
+              "Canning: principles, containers, heat penetration, pH classification",
+              "Drying and dehydration: Heat and mass transfer, drying curve, pre-treatments",
+              "Driers in food industry: drum, spray, fluidized bed, freeze drying"
+            ]
+          },
+          {
+            name: "Module II: Low Temperature Techniques",
+            topics: [
+              "Chilling: Low temperature preservation of fresh produce, meat and fish",
+              "Chilling injury and changes during refrigeration",
+              "Freezing: principles, methods (quick/slow), quality of frozen food",
+              "Retrogradation, protein denaturation, freezer burn, IQF",
+              "Thawing: Effects on food and common changes"
+            ]
+          },
+          {
+            name: "Module III: Fermentation and Preservatives",
+            topics: [
+              "Fermentation: Alcoholic, acetic acid and lactic acid fermentation",
+              "Natural preservatives: sugar, salt, vinegar, spices",
+              "Chemical preservatives: SO2, benzoic acid, sorbates, FSSAI regulations",
+              "Food additives: Antioxidants and Antibiotics",
+              "Preservation by controlling water activity: high sugar, IMF, curing"
+            ]
+          },
+          {
+            name: "Module IV: Recent Trends and NPD",
+            topics: [
+              "Non-thermal technologies: Microfiltration, Pulsed electric field",
+              "High pressure and microwave processing",
+              "Alternate thermal: Ohmic, dielectric, infrared, induction heating",
+              "Nanotechnology and Hurdle technology principles",
+              "Irradiation and New Product Development (NPD) steps",
+              "Sensory evaluation and panel selection methods"
+            ]
+          },
+          {
+            name: "Module V: Practicals",
+            topics: [
+              "Blanching and Dehydration of vegetables",
+              "Determination of moisture content",
+              "Qualitative determination of Benzoic acid & SO2",
+              "Sensory evaluation practicals",
+              "Industrial visit to Food Processing unit"
+            ]
+          }
+        ]
+      },
+      {
+        id: "ft_s4_cpot",
+        name: "Cereals, Pulses and Oil Seeds Technology",
+        topics: ["Wheat & Rice", "Bakery", "Confectionery", "Millets", "Pulses & Oil Seeds"],
+        modules: [
+          {
+            name: "Module I: Technology of Wheat and Rice",
+            topics: [
+              "Wheat: Structure, composition, varieties and milling operations",
+              "Wheat products and by-products",
+              "Rice: structure, composition, types and cooking quality",
+              "Parboiling of Rice: process, advantages and disadvantages",
+              "Milling of rice: steps and factors affecting quality",
+              "Rice by-products"
+            ]
+          },
+          {
+            name: "Module II: Bakery and Confectionery",
+            topics: [
+              "Baking: principles, classification, and additives",
+              "Bread making: ingredients, faults, remedies, and staling",
+              "Cake making: types, ingredients, and faults",
+              "Biscuits & Cookies: Crackers/Wafers technology and remedies",
+              "FSSAI specifications for bakery goods",
+              "Confectionery: raw materials, hard candy, toffee, caramel"
+            ]
+          },
+          {
+            name: "Module III: Millets, Oats and Barley",
+            topics: [
+              "Composition and types of millets, oats, corn and barley",
+              "Important Millets and their general processing"
+            ]
+          },
+          {
+            name: "Module IV: Pulses, Nuts and Oil Seeds",
+            topics: [
+              "Pulses: Composition, processing (soaking, germination, milling)",
+              "Anti-nutritional factors in pulses",
+              "Nuts and Oil Seeds: processing of soybean and coconut",
+              "Hydrogenation, refining of fats/oils, shortening, margarine",
+              "Oil extraction methods: mechanical expression, solvent extraction",
+              "Refining and stabilization of rice bran"
+            ]
+          },
+          {
+            name: "Module V: Practicals",
+            topics: [
+              "Determination of moisture, ash, and alcoholic acidity",
+              "Sedimentation value and estimation of gluten",
+              "Water absorption power and falling number",
+              "Preparation of bread, biscuits, cookies, and cake",
+              "Physical parameters of wheat and rice"
+            ]
+          }
+        ]
+      },
+      {
+        id: "ft_s4_spc",
+        name: "Spices and Plantation Crops",
+        topics: ["Classification", "Post-harvest", "Spice Oils", "Major Spices", "Tea & Coffee"],
+        modules: [
+          {
+            name: "Module I: Introduction to Spices",
+            topics: [
+              "Spices: Definition, classification, and chemical composition",
+              "Post-harvest technology and FSSAI standards",
+              "Quality control and therapeutic value of spices",
+              "Spice oil and Oleoresins extraction techniques"
+            ]
+          },
+          {
+            name: "Module II: Major Spices",
+            topics: [
+              "Pepper: refining, processing, and pepper products",
+              "Chilies: drying and quality attributes (Paprika)",
+              "Cardamom: drying, bleaching, and grading",
+              "Ginger & Turmeric: curing, grading, and dehydrated products"
+            ]
+          },
+          {
+            name: "Module III: Minor Spices",
+            topics: [
+              "Processing of herbs, leaves, and seasonings",
+              "Processing of Aniseed, basil, caraway, cinnamon, and clove",
+              "Processing of coriander, cumin, fennel, and nutmeg",
+              "Processing of mint, saffron, and rosemary"
+            ]
+          },
+          {
+            name: "Module IV: Plantation Crops",
+            topics: [
+              "TEA: unit operations and process flow-chart",
+              "COFFEE: dry and wet processing, green/cherry coffee",
+              "COCOA: unit operations, cocoa/chocolate processing",
+              "VANILLA & ANNATTO: flowchart and utilization"
+            ]
+          }
+        ]
+      },
+      {
+        id: "ft_s4_fepn",
+        name: "Basics of Food Engineering and Packaging Technology",
+        topics: ["Physical Properties", "Heat Transfer", "Packaging Materials", "Labelling", "Trends"],
+        modules: [
+          {
+            name: "Module I: Basics of Food Engineering",
+            topics: [
+              "Engineering Properties: physical, mechanical, thermal, rheological",
+              "Unit operations: Blanching, evaporation, drying, freezing/chilling",
+              "Extrusion: single/twin-screw mechanism and applications",
+              "Heat Transfer: conduction, convection, radiation",
+              "Heat Exchangers and Boilers: types, principle, and working"
+            ]
+          },
+          {
+            name: "Module II: Introduction to Packaging Technology",
+            topics: [
+              "Functions and design considerations of food packaging",
+              "Packaging Materials: Glass, metal (tin/aluminum), composites",
+              "Plastic films and rigid plastics classification (LDPE, HDPE, PET, etc.)",
+              "Additives in plastics and manufacturing (Injection/Blow moulding)",
+              "Lamination, metallisation, and orientation techniques",
+              "Containers: pouches, cans, jars, CFB, wooden containers"
+            ]
+          },
+          {
+            name: "Module III: Packaging Systems & Quality",
+            topics: [
+              "Modified and controlled atmosphere packaging (MAP/CAP)",
+              "Active, intelligent, aseptic, and retort pouch packaging",
+              "Shrink, stretch, and vacuum packaging",
+              "Packaging standards, laws, labelling requirements, and quality control",
+              "Tainting and migration in food packaging"
+            ]
+          },
+          {
+            name: "Module IV: Specific Food Packaging",
+            topics: [
+              "Packaging for fruits, vegetables, meat, fish, and poultry",
+              "Packaging for fats, oils, spices, and dairy products",
+              "Packaging for beverages, bakery, and confectionery products"
+            ]
+          },
+          {
+            name: "Module V: Practicals",
+            topics: [
+              "Identification of packaging materials and grammage",
+              "Water/Oil absorption tests and Drop test",
+              "Shelf-life study and chemical/physical tests",
+              "Tearing/Bursting/Puncture resistance demonstration",
+              "New Tech: Blockchain and 3D printing in packaging"
+            ]
+          }
+        ]
+      }
+    ]
   }
 ];

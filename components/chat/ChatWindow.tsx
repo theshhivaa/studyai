@@ -9,6 +9,7 @@ import { getScoobyResponse } from "@/lib/ai";
 import confetti from "canvas-confetti";
 import useSound from "use-sound";
 import { useAvatar } from "@/components/context/AvatarContext";
+import DictationOverlay from "./DictationOverlay";
 
 interface Message {
   role: "user" | "assistant";
@@ -30,6 +31,8 @@ export default function ChatWindow({ initialMessage = "", activeCourse = "BCA" }
     base64: string;
     mimeType: string;
   } | null>(null);
+  const [dictationText, setDictationText] = useState("");
+  const [isDictationOpen, setIsDictationOpen] = useState(false);
   
   const scrollRef = useRef<HTMLDivElement>(null);
   const recognitionRef = useRef<any>(null);
@@ -261,7 +264,15 @@ export default function ChatWindow({ initialMessage = "", activeCourse = "BCA" }
         <div className="max-w-4xl mx-auto w-full min-w-0">
           <AnimatePresence initial={false}>
             {messages.map((msg, i) => (
-              <MessageBubble key={i} role={msg.role} content={msg.content} />
+              <MessageBubble 
+                key={i} 
+                role={msg.role} 
+                content={msg.content} 
+                onDictate={(text) => {
+                  setDictationText(text);
+                  setIsDictationOpen(true);
+                }}
+              />
             ))}
           </AnimatePresence>
           
@@ -462,6 +473,12 @@ export default function ChatWindow({ initialMessage = "", activeCourse = "BCA" }
           </form>
         </div>
       </div>
+
+      <DictationOverlay 
+        isOpen={isDictationOpen}
+        onClose={() => setIsDictationOpen(false)}
+        text={dictationText}
+      />
     </div>
   );
 }

@@ -1,7 +1,7 @@
 "use client";
 
 import ReactMarkdown from "react-markdown";
-import { Copy, Check } from "lucide-react";
+import { Copy, Check, Headphones } from "lucide-react";
 import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import ScoobyyAvatar from "@/components/ScoobyyAvatar";
@@ -9,9 +9,10 @@ import ScoobyyAvatar from "@/components/ScoobyyAvatar";
 interface MessageBubbleProps {
   role: "user" | "assistant";
   content: string;
+  onDictate?: (content: string) => void;
 }
 
-export default function MessageBubble({ role, content }: MessageBubbleProps) {
+export default function MessageBubble({ role, content, onDictate }: MessageBubbleProps) {
   const [copied, setCopied] = useState(false);
   const [mounted, setMounted] = useState(false);
 
@@ -104,7 +105,17 @@ export default function MessageBubble({ role, content }: MessageBubbleProps) {
             </div>
           </div>
           
-          <div className={`mt-1 flex items-center gap-2 ${role === "user" ? "justify-end" : "justify-start"}`}>
+          <div className={`mt-2 flex items-center gap-3 ${role === "user" ? "justify-end" : "justify-start"}`}>
+            {role === "assistant" && onDictate && (
+              <button
+                onClick={() => onDictate(content)}
+                className="flex items-center gap-1.5 px-2 py-1 rounded-lg bg-primary/10 text-primary hover:bg-primary/20 transition-colors group"
+                title="Dictation Mode"
+              >
+                <Headphones size={12} className="group-hover:scale-110 transition-transform" />
+                <span className="text-[10px] font-bold">Dictate</span>
+              </button>
+            )}
             <span className="text-[8px] sm:text-[9px] text-text-muted opacity-60 font-mono tracking-tighter">
               {new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
             </span>

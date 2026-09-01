@@ -8,6 +8,7 @@ import MessageBubble from "./MessageBubble";
 import ScoobyyAvatar from "@/components/ScoobyyAvatar";
 import { useAvatar } from "@/components/context/AvatarContext";
 import { useGuest } from "../context/GuestContext";
+import DictationOverlay from "./DictationOverlay";
 
 interface Message {
   role: "user" | "assistant";
@@ -46,6 +47,8 @@ export default function ChatArea({
     base64: string;
     mimeType: string;
   } | null>(null);
+  const [dictationText, setDictationText] = useState("");
+  const [isDictationOpen, setIsDictationOpen] = useState(false);
   
   const scrollRef = useRef<HTMLDivElement>(null);
   const recognitionRef = useRef<any>(null);
@@ -246,7 +249,15 @@ export default function ChatArea({
           <div className="max-w-4xl mx-auto w-full min-w-0 space-y-6">
             <AnimatePresence initial={false}>
               {messages.map((msg, i) => (
-                <MessageBubble key={i} role={msg.role} content={msg.content} />
+                <MessageBubble 
+                  key={i} 
+                  role={msg.role} 
+                  content={msg.content} 
+                  onDictate={(text) => {
+                    setDictationText(text);
+                    setIsDictationOpen(true);
+                  }}
+                />
               ))}
             </AnimatePresence>
             
@@ -395,6 +406,12 @@ export default function ChatArea({
           </form>
         </div>
       </footer>
+
+      <DictationOverlay 
+        isOpen={isDictationOpen}
+        onClose={() => setIsDictationOpen(false)}
+        text={dictationText}
+      />
     </div>
   );
 }

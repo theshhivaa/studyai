@@ -72,7 +72,7 @@ export async function POST(request: Request) {
 
     // Use vision model if image is provided
     const isImage = fileData && fileData.mimeType.startsWith("image/");
-    const model = isImage ? "meta-llama/llama-4-scout-17b-16e-instruct" : "llama-3.3-70b-versatile";
+    const model = isImage ? "qwen/qwen3.6-27b" : "openai/gpt-oss-120b";
 
     const messages: any[] = [
       { role: "system", content: `${SYSTEM_PROMPT}\n\nCURRENT CONTEXT: ${courseContext}` },
